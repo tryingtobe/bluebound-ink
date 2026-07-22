@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books | Bluebound Ink</title>
+    <title>The Poppy War | Bluebound Ink</title>
     <!-- Importing Cormorant Garamond from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@
             
             font-family: "Cormorant Garamond", Georgia, serif;
             color: var(--text-color);
-            max-width: 900px;
+            max-width: 800px;
             margin: 100px auto;
             padding: 0 50px;
             line-height: 2.0;
@@ -51,7 +51,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 90px;
+            margin-bottom: 70px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 45px;
         }
@@ -115,86 +115,89 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Bookshelf Layout with Covers */
-        .month-group {
+        /* Review Header Layout */
+        .review-header {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
             margin-bottom: 60px;
-        }
-
-        .month-title {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 25px;
-            padding-bottom: 8px;
+            padding-bottom: 40px;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .book-list {
+        .review-cover {
+    width: 160px;
+    /* height: 240px; <-- DELETE THIS LINE */
+    object-fit: contain; 
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+    /* background-color: ... <-- Optional background, no longer needed */
+}
+        }
+
+        .review-meta-info {
             display: flex;
             flex-direction: column;
-            gap: 24px;
         }
 
-        .book-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .book-item:last-child {
-            border-bottom: none;
-        }
-
-        .book-cover {
-            width: 60px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 3px;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-            transition: transform 0.2s ease;
-        }
-
-        .book-item:hover .book-cover {
-            transform: scale(1.03);
-        }
-
-        .book-info {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .book-title-link {
-            font-size: 1.5rem;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 400;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-
-        .book-title-link:hover {
-            color: #e6c567;
-        }
-
-        .book-author {
-            font-size: 1.1rem;
-            opacity: 0.6;
+        .review-book-title {
+            font-size: 2.4rem;
+            font-weight: 500;
             font-style: italic;
+            line-height: 1.2;
+            margin: 0 0 10px 0;
         }
 
-        .book-rating {
+        .review-author {
+            font-size: 1.3rem;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .review-rating-date {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--gold-date);
-            white-space: nowrap;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Featured Quote */
+        .featured-quote {
+            margin: 50px 0;
+            padding: 30px 40px;
+            border-left: 2px solid var(--gold-date);
+            background: rgba(212, 175, 55, 0.03);
+            font-style: italic;
+            font-size: 1.6rem;
+            line-height: 1.6;
+        }
+
+        /* Review Body Writing */
+        .review-body p {
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 60px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            color: var(--text-color);
+            opacity: 0.7;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            color: #e6c567;
         }
     </style>
 </head>
@@ -202,51 +205,48 @@
 
     <header>
         <div class="site-branding">
-            <h1 class="site-title"><a href="blog.html" style="color: inherit; text-decoration: none;">Bluebound <span class="gold-accent">Ink</span></a></h1>
+            <h1 class="site-title"><a href="../blog.html" style="color: inherit; text-decoration: none;">Bluebound <span class="gold-accent">Ink</span></a></h1>
         </div>
         <nav>
-            <a href="books.html" style="opacity: 1; color: #e6c567;">Books</a>
-            <a href="music.html">Music</a>
-            <a href="about.html">About</a>
+            <a href="../books.html" style="opacity: 1; color: #e6c567;">Books</a>
+            <a href="../music.html">Music</a>
+            <a href="../about.html">About</a>
             <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
         </nav>
     </header>
 
     <main>
-        <h2 class="posts-section-title gold-accent" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 40px;">Reading Log</h2>
-
-        <!-- December 2025 -->
-        <div class="month-group">
-            <h3 class="month-title gold-accent">December 2025</h3>
-            <div class="book-list">
-                
-                <!-- Book 1: The Poppy War -->
-                <article class="book-item">
-                    <a href="book-single.html">
-                        <img src="images/poppy-war.jpg" alt="The Poppy War cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-single.html" class="book-title-link">The Poppy War (The Poppy War, #1)</a>
-                        <span class="book-author">by R.F. Kuang</span>
-                    </div>
-                    <div class="book-rating">★ 4.35</div>
-                </article>
-
-                <!-- Book 2: Babel -->
-                <article class="book-item">
-                    <a href="book-single.html">
-                        <img src="images/babel.jpg" alt="Babel cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-single.html" class="book-title-link">Babel, or The Necessity of Violence</a>
-                        <span class="book-author">by R.F. Kuang</span>
-                    </div>
-                    <div class="book-rating">★ 4.33</div>
-                </article>
-
+        <div class="review-header">
+            <!-- Points backward out of book-reviews folder into images/poppy-war.webp -->
+            <img src="../images/poppy-war.webp" alt="The Poppy War cover" class="review-cover">
+            <div class="review-meta-info">
+                <h2 class="review-book-title">The Poppy War (The Poppy War, #1)</h2>
+                <div class="review-author">by R.F. Kuang</div>
+                <div class="review-rating-date">
+                    <span>★ 4.35 / 5</span>
+                    <span>&bull;</span>
+                    <span>Added: Dec 15, 2025</span>
+                </div>
             </div>
         </div>
 
+        <blockquote class="featured-quote">
+            "They were not her people. They were strangers who shared her skin, her dialect, and her history of suffering, but they were not her people."
+        </blockquote>
+
+        <div class="review-body">
+            <p>
+                R.F. Kuang’s debut novel is a masterclass in shifting tones, starting as an intense, competitive academic drama set in an elite military school before violently widening into a brutal, harrowing epic of war, trauma, and survival. 
+            </p>
+            <p>
+                What makes the narrative stick long after the final page is its refusal to offer clean moral comforts. The protagonist, Rin, begins as a survivor driven by sheer willpower and desperate ambition, only to find herself swallowed by forces far larger than she can control. The pacing accelerates with the relentless pressure of a collapsing world, making every choice feel heavy with consequence.
+            </p>
+            <p>
+                A profound, challenging exploration of power, shamanism, and historical memory that leaves you breathless.
+            </p>
+        </div>
+
+        <a href="../books.html" class="back-link">&larr; Back to Reading Log</a>
     </main>
 
     <script>
