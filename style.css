@@ -1,8 +1,5 @@
-:root {
+::root {
     --bg-color: #0f172a;
-    --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
-    --bg-size: 32px 32px;
-    
     --text-color: #ece3d0;
     --text-opacity: 0.85;
     --border-color: rgba(236, 227, 208, 0.15);
@@ -11,9 +8,6 @@
 
 body.light-mode {
     --bg-color: #f7f4ec;
-    --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
-    --bg-size: 32px 32px;
-
     --text-color: #2c2925;
     --text-opacity: 0.9;
     --border-color: rgba(44, 41, 37, 0.15);
@@ -22,16 +16,17 @@ body.light-mode {
 
 body {
     background-color: var(--bg-color);
-    background-image: var(--bg-texture);
-    background-size: var(--bg-size);
     
-    font-family: "Cormorant Garamond", Georgia, serif;
+    font-family: "Sabon MT W02", Georgia, serif;
     color: var(--text-color);
     max-width: 900px;
     margin: 100px auto;
     padding: 0 50px;
-    line-height: 2.0;
-    font-size: 1.4rem;
+    line-height: 1.8;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.02em; /* Adds a subtle space between letters */
+    -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -160,7 +155,7 @@ header nav a:hover {
     font-size: 1.5rem;
     text-decoration: none;
     color: var(--text-color);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.2;
     transition: color 0.2s ease;
 }
