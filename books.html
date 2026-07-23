@@ -9,193 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
-            --bg-size: 32px 32px;
-            
-            --text-color: #ece3d0;
-            --text-opacity: 0.85;
-            --border-color: rgba(236, 227, 208, 0.15);
-            --gold-date: #d4af37;
-        }
-
-        body.light-mode {
-            --bg-color: #f7f4ec;
-            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
-            --bg-size: 32px 32px;
-
-            --text-color: #2c2925;
-            --text-opacity: 0.9;
-            --border-color: rgba(44, 41, 37, 0.15);
-            --gold-date: #b8860b;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            background-image: var(--bg-texture);
-            background-size: var(--bg-size);
-            
-            font-family: "Cormorant Garamond", Georgia, serif;
-            color: var(--text-color);
-            max-width: 900px;
-            margin: 100px auto;
-            padding: 0 50px;
-            line-height: 2.0;
-            font-size: 1.4rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 90px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 45px;
-        }
-
-        .site-branding {
-            text-align: left;
-        }
-
-        .site-title {
-            font-size: 2.9rem;
-            font-weight: 500;
-            letter-spacing: -0.5px;
-            margin: 0;
-            font-style: italic;
-            color: var(--text-color);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        header nav {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            font-family: "Cormorant Garamond", Georgia, serif;
-            font-size: 1.6rem;
-        }
-
-        header nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            opacity: 0.75;
-            transition: opacity 0.2s ease, color 0.2s ease;
-        }
-
-        header nav a:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 1.6rem;
-            opacity: 0.8;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-
-        .gold-accent {
-            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Bookshelf Layout with Covers */
-        .month-group {
-            margin-bottom: 60px;
-        }
-
-        .month-title {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 25px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .book-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .book-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .book-item:last-child {
-            border-bottom: none;
-        }
-
-        .book-cover {
-            width: 60px;
-            object-fit: contain;
-            border-radius: 3px;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-            transition: transform 0.2s ease;
-        }
-
-        .book-item:hover .book-cover {
-            transform: scale(1.03);
-        }
-
-        .book-info {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .book-title-link {
-            font-size: 1.5rem;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 400;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-
-        .book-title-link:hover {
-            color: #e6c567;
-        }
-
-        .book-author {
-            font-size: 1.1rem;
-            opacity: 0.6;
-            font-style: italic;
-        }
-
-        .book-rating {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gold-date);
-            white-space: nowrap;
-        }
-    </style>
+    <!-- External Global Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -214,12 +29,128 @@
     <main>
         <h2 class="posts-section-title gold-accent" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 40px;">Reading Log</h2>
 
+        <!-- June 2026 -->
+        <div class="month-group">
+            <h3 class="month-title gold-accent">June 2026</h3>
+            <div class="book-list">
+                <article class="book-item">
+                    <a href="book-reviews/persuasion.html">
+                        <img src="images/persuasion.webp" alt="Persuasion cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/persuasion.html" class="book-title-link">Persuasion</a>
+                        <span class="book-author">by Jane Austen</span>
+                    </div>
+                    <div class="book-rating">★ 4.56</div>
+                </article>
+                <article class="book-item">
+                    <a href="book-reviews/katabasis.html">
+                        <img src="images/katabasis.webp" alt="Katabasis cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/katabasis.html" class="book-title-link">Katabasis</a>
+                        <span class="book-author">by R.F. Kuang</span>
+                    </div>
+                    <div class="book-rating">★ 4.23</div>
+                </article>
+                <article class="book-item">
+                    <a href="book-reviews/the-lion-women-of-tehran.html">
+                        <img src="images/the-lion-women-of-tehran.jpg" alt="The Lion Women of Tehran cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/the-lion-women-of-tehran.html" class="book-title-link">The Lion Women of Tehran</a>
+                        <span class="book-author">by Marjan Kamali</span>
+                    </div>
+                    <div class="book-rating">★ 4.67</div>
+                </article>
+            </div>
+        </div>
+
+        <!-- May 2026 -->
+        <div class="month-group">
+            <h3 class="month-title gold-accent">May 2026</h3>
+            <div class="book-list">
+                <article class="book-item">
+                    <a href="book-reviews/the-fire-of-vengeance.html">
+                        <img src="images/the-fire-of-vengeance.webp" alt="The Fire of Vengeance cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/the-fire-of-vengeance.html" class="book-title-link">The Fire of Vengeance (The Burning, #2)</a>
+                        <span class="book-author">by Evan Winter</span>
+                    </div>
+                    <div class="book-rating">★ 4.28</div>
+                </article>
+            </div>
+        </div>
+
+        <!-- April 2026 -->
+        <div class="month-group">
+            <h3 class="month-title gold-accent">April 2026</h3>
+            <div class="book-list">
+                <article class="book-item">
+                    <a href="book-reviews/alchemised.html">
+                        <img src="images/alchemised.jpg" alt="Alchemised cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/alchemised.html" class="book-title-link">Alchemised</a>
+                        <span class="book-author">by SenLinYu</span>
+                    </div>
+                    <div class="book-rating">★ 3.17</div>
+                </article>
+            </div>
+        </div>
+
+        <!-- March 2026 -->
+        <div class="month-group">
+            <h3 class="month-title gold-accent">March 2026</h3>
+            <div class="book-list">
+                <article class="book-item">
+                    <a href="book-reviews/the-rage-of-dragons.html">
+                        <img src="images/the-rage-of-dragons.webp" alt="The Rage of Dragons cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/the-rage-of-dragons.html" class="book-title-link">The Rage of Dragons (The Burning, #1)</a>
+                        <span class="book-author">by Evan Winter</span>
+                    </div>
+                    <div class="book-rating">★ 4.37</div>
+                </article>
+                <article class="book-item">
+                    <a href="book-reviews/the-jasad-heir.html">
+                        <img src="images/the-jasad-heir.webp" alt="The Jasad Heir cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/the-jasad-heir.html" class="book-title-link">The Jasad Heir (The Scorched Throne, #1)</a>
+                        <span class="book-author">by Sara Hashem</span>
+                    </div>
+                    <div class="book-rating">★ 4.52</div>
+                </article>
+                <article class="book-item">
+                    <a href="book-reviews/the-jasad-crown.html">
+                        <img src="images/the-jasad-crown.webp" alt="The Jasad Crown cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/the-jasad-crown.html" class="book-title-link">The Jasad Crown (The Scorched Throne, #2)</a>
+                        <span class="book-author">by Sara Hashem</span>
+                    </div>
+                    <div class="book-rating">★ 4.64</div>
+                </article>
+                <article class="book-item">
+                    <a href="book-reviews/the-poet-empress.html">
+                        <img src="images/the-poet-empress.png" alt="The Poet Empress cover" class="book-cover">
+                    </a>
+                    <div class="book-info">
+                        <a href="book-reviews/the-poet-empress.html" class="book-title-link">The Poet Empress</a>
+                        <span class="book-author">by Shen Tao</span>
+                    </div>
+                    <div class="book-rating">★ 4.76</div>
+                </article>
+            </div>
+        </div>
+
         <!-- February 2026 -->
         <div class="month-group">
             <h3 class="month-title gold-accent">February 2026</h3>
             <div class="book-list">
-                
-                <!-- Book 1: The Burning God -->
                 <article class="book-item">
                     <a href="book-reviews/the-burning-god.html">
                         <img src="images/the-burning-god.webp" alt="The Burning God cover" class="book-cover">
@@ -230,8 +161,6 @@
                     </div>
                     <div class="book-rating">★ 4.47</div>
                 </article>
-
-                <!-- Book 2: The Sword of Kaigen -->
                 <article class="book-item">
                     <a href="book-reviews/the-sword-of-kaigen.html">
                         <img src="images/the-sword-of-kaigen.webp" alt="The Sword of Kaigen cover" class="book-cover">
@@ -242,8 +171,6 @@
                     </div>
                     <div class="book-rating">★ 4.25</div>
                 </article>
-
-                <!-- Book 3: Before I Let Go -->
                 <article class="book-item">
                     <a href="book-reviews/before-i-let-go.html">
                         <img src="images/Before-I-Let-Go.jpg" alt="Before I Let Go cover" class="book-cover">
@@ -254,8 +181,6 @@
                     </div>
                     <div class="book-rating">★ 5.00</div>
                 </article>
-
-                <!-- Book 4: The Mademoiselle Alliance -->
                 <article class="book-item">
                     <a href="book-reviews/the-mademoiselle-alliance.html">
                         <img src="images/The+Mademoiselle+Alliance.webp" alt="The Mademoiselle Alliance cover" class="book-cover">
@@ -266,7 +191,6 @@
                     </div>
                     <div class="book-rating">★ 4.25</div>
                 </article>
-
             </div>
         </div>
 
@@ -274,8 +198,6 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">January 2026</h3>
             <div class="book-list">
-                
-                <!-- Book 1: The Dragon Republic -->
                 <article class="book-item">
                     <a href="book-reviews/the-dragon-republic.html">
                         <img src="images/the-dragon-republic.webp" alt="The Dragon Republic cover" class="book-cover">
@@ -286,8 +208,6 @@
                     </div>
                     <div class="book-rating">★ 4.63</div>
                 </article>
-
-                <!-- Book 2: The Midnight Library -->
                 <article class="book-item">
                     <a href="book-reviews/the-midnight-library.html">
                         <img src="images/midnight-library.jpg" alt="The Midnight Library cover" class="book-cover">
@@ -298,8 +218,6 @@
                     </div>
                     <div class="book-rating">★ 3.85</div>
                 </article>
-
-                <!-- Book 3: Piranesi -->
                 <article class="book-item">
                     <a href="book-reviews/piranesi.html">
                         <img src="images/piranesi.jpg" alt="Piranesi cover" class="book-cover">
@@ -310,7 +228,6 @@
                     </div>
                     <div class="book-rating">★ 4.40</div>
                 </article>
-
             </div>
         </div>
 
@@ -318,8 +235,6 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">December 2025</h3>
             <div class="book-list">
-                
-                <!-- Book 1: The Poppy War -->
                 <article class="book-item">
                     <a href="book-reviews/the-poppy-war.html">
                         <img src="images/poppy-war.webp" alt="The Poppy War cover" class="book-cover">
@@ -330,8 +245,6 @@
                     </div>
                     <div class="book-rating">★ 4.35</div>
                 </article>
-
-                <!-- Book 2: Babel -->
                 <article class="book-item">
                     <a href="book-reviews/babel.html">
                         <img src="images/babel.jpg" alt="Babel cover" class="book-cover">
@@ -342,7 +255,6 @@
                     </div>
                     <div class="book-rating">★ 4.33</div>
                 </article>
-
             </div>
         </div>
 

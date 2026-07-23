@@ -9,194 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
-            --bg-size: 32px 32px;
-            
-            --text-color: #ece3d0;
-            --text-opacity: 0.85;
-            --border-color: rgba(236, 227, 208, 0.15);
-            --gold-date: #d4af37;
-        }
-
-        body.light-mode {
-            --bg-color: #f7f4ec;
-            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
-            --bg-size: 32px 32px;
-
-            --text-color: #2c2925;
-            --text-opacity: 0.9;
-            --border-color: rgba(44, 41, 37, 0.15);
-            --gold-date: #b8860b;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            background-image: var(--bg-texture);
-            background-size: var(--bg-size);
-            
-            font-family: "Cormorant Garamond", Georgia, serif;
-            color: var(--text-color);
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 0 50px;
-            line-height: 2.0;
-            font-size: 1.4rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 70px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 45px;
-        }
-
-        .site-branding {
-            text-align: left;
-        }
-
-        .site-title {
-            font-size: 2.9rem;
-            font-weight: 500;
-            letter-spacing: -0.5px;
-            margin: 0;
-            font-style: italic;
-            color: var(--text-color);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        header nav {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            font-family: "Cormorant Garamond", Georgia, serif;
-            font-size: 1.6rem;
-        }
-
-        header nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            opacity: 0.75;
-            transition: opacity 0.2s ease, color 0.2s ease;
-        }
-
-        header nav a:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 1.6rem;
-            opacity: 0.8;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-
-        .gold-accent {
-            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Review Header Layout */
-        .review-header {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .review-cover {
-            width: 160px;
-            object-fit: contain; 
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-
-        .review-meta-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .review-book-title {
-            font-size: 2.4rem;
-            font-weight: 500;
-            font-style: italic;
-            line-height: 1.2;
-            margin: 0 0 10px 0;
-        }
-
-        .review-author {
-            font-size: 1.3rem;
-            opacity: 0.7;
-            margin-bottom: 20px;
-        }
-
-        .review-rating-date {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gold-date);
-            display: flex;
-            gap: 20px;
-        }
-
-        /* Featured Quote */
-        .featured-quote {
-            margin: 50px 0;
-            padding: 30px 40px;
-            border-left: 2px solid var(--gold-date);
-            background: rgba(212, 175, 55, 0.03);
-            font-style: italic;
-            font-size: 1.6rem;
-            line-height: 1.6;
-        }
-
-        /* Review Body Writing */
-        .review-body p {
-            margin-bottom: 30px;
-            text-align: justify;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 60px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            text-decoration: none;
-            color: var(--text-color);
-            opacity: 0.7;
-            transition: opacity 0.2s ease, color 0.2s ease;
-        }
-
-        .back-link:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-    </style>
+    <!-- External Global Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -214,7 +28,6 @@
 
     <main>
         <div class="review-header">
-            <!-- Points backward out of book-reviews folder into images/poppy-war.webp -->
             <img src="../images/poppy-war.webp" alt="The Poppy War cover" class="review-cover">
             <div class="review-meta-info">
                 <h2 class="review-book-title">The Poppy War (The Poppy War, #1)</h2>
@@ -222,24 +35,24 @@
                 <div class="review-rating-date">
                     <span>★ 4.35 / 5</span>
                     <span>&bull;</span>
-                    <span>Added: Dec 15, 2025</span>
+                    <span>Added: Dec 2025</span>
                 </div>
             </div>
         </div>
 
         <blockquote class="featured-quote">
-            "They were not her people. They were strangers who shared her skin, her dialect, and her history of suffering, but they were not her people."
+            "War does not determine who is right—only who is left."
         </blockquote>
 
         <div class="review-body">
             <p>
-                R.F. Kuang’s debut novel is a masterclass in shifting tones, starting as an intense, competitive academic drama set in an elite military school before violently widening into a brutal, harrowing epic of war, trauma, and survival. 
+                R.F. Kuang’s blistering debut introduces us to Rin, an orphan war refugee who claws her way out of poverty by securing a spot at Sinegard, the elite military academy of the Nikan Empire. What begins as a classic, grueling academy-underdog story rapidly descends into a harrowing, brutal epic fantasy inspired by 20th-century Asian history.
             </p>
             <p>
-                What makes the narrative stick long after the final page is its refusal to offer clean moral comforts. The protagonist, Rin, begins as a survivor driven by sheer willpower and desperate ambition, only to find herself swallowed by forces far larger than she can control. The pacing accelerates with the relentless pressure of a collapsing world, making every choice feel heavy with consequence.
+                As an impending invasion looms over the empire, Rin discovers that she possesses a dangerous, god-given affinity for shamanism. Kuang does not shy away from the horrific realities of war, exploring complex themes of power, survival, and the devastating moral compromises required when total destruction is the only alternative to defeat.
             </p>
             <p>
-                A profound, challenging exploration of power, shamanism, and historical memory that leaves you breathless.
+                A stunning, emotionally heavy masterpiece that redefines modern grimdark fantasy.
             </p>
         </div>
 

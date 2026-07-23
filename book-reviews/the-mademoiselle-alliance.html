@@ -9,194 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
-            --bg-size: 32px 32px;
-            
-            --text-color: #ece3d0;
-            --text-opacity: 0.85;
-            --border-color: rgba(236, 227, 208, 0.15);
-            --gold-date: #d4af37;
-        }
-
-        body.light-mode {
-            --bg-color: #f7f4ec;
-            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
-            --bg-size: 32px 32px;
-
-            --text-color: #2c2925;
-            --text-opacity: 0.9;
-            --border-color: rgba(44, 41, 37, 0.15);
-            --gold-date: #b8860b;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            background-image: var(--bg-texture);
-            background-size: var(--bg-size);
-            
-            font-family: "Cormorant Garamond", Georgia, serif;
-            color: var(--text-color);
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 0 50px;
-            line-height: 2.0;
-            font-size: 1.4rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 70px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 45px;
-        }
-
-        .site-branding {
-            text-align: left;
-        }
-
-        .site-title {
-            font-size: 2.9rem;
-            font-weight: 500;
-            letter-spacing: -0.5px;
-            margin: 0;
-            font-style: italic;
-            color: var(--text-color);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        header nav {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            font-family: "Cormorant Garamond", Georgia, serif;
-            font-size: 1.6rem;
-        }
-
-        header nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            opacity: 0.75;
-            transition: opacity 0.2s ease, color 0.2s ease;
-        }
-
-        header nav a:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 1.6rem;
-            opacity: 0.8;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-
-        .gold-accent {
-            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Review Header Layout */
-        .review-header {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .review-cover {
-            width: 160px;
-            object-fit: contain; 
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-
-        .review-meta-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .review-book-title {
-            font-size: 2.4rem;
-            font-weight: 500;
-            font-style: italic;
-            line-height: 1.2;
-            margin: 0 0 10px 0;
-        }
-
-        .review-author {
-            font-size: 1.3rem;
-            opacity: 0.7;
-            margin-bottom: 20px;
-        }
-
-        .review-rating-date {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gold-date);
-            display: flex;
-            gap: 20px;
-        }
-
-        /* Featured Quote */
-        .featured-quote {
-            margin: 50px 0;
-            padding: 30px 40px;
-            border-left: 2px solid var(--gold-date);
-            background: rgba(212, 175, 55, 0.03);
-            font-style: italic;
-            font-size: 1.6rem;
-            line-height: 1.6;
-        }
-
-        /* Review Body Writing */
-        .review-body p {
-            margin-bottom: 30px;
-            text-align: justify;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 60px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            text-decoration: none;
-            color: var(--text-color);
-            opacity: 0.7;
-            transition: opacity 0.2s ease, color 0.2s ease;
-        }
-
-        .back-link:hover {
-            opacity: 1;
-            color: #e6c567;
-        }
-    </style>
+    <!-- External Global Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -214,7 +28,6 @@
 
     <main>
         <div class="review-header">
-            <!-- Matches exact filename with spaces/plus signs encoded or handled, matching your images folder setup -->
             <img src="../images/The+Mademoiselle+Alliance.webp" alt="The Mademoiselle Alliance cover" class="review-cover">
             <div class="review-meta-info">
                 <h2 class="review-book-title">The Mademoiselle Alliance</h2>
@@ -228,18 +41,18 @@
         </div>
 
         <blockquote class="featured-quote">
-            "Courage is not the absence of fear, but the triumph over it in the darkest hours."
+            "Courage is not the absence of fear, but the fierce resolve to act in spite of it."
         </blockquote>
 
         <div class="review-body">
             <p>
-                Natasha Lester weaves a gripping, deeply moving historical fiction narrative centered around the incredible, untold underground networks of women who risked everything during wartime France. 
+                Natasha Lester weaves a gripping, deeply emotional historical novel centered around the extraordinary bravery of women during wartime resistance. *The Mademoiselle Alliance* highlights the hidden networks of courage, sacrifice, and espionage that operated beneath the surface of occupied Europe.
             </p>
             <p>
-                The pacing balances high-stakes espionage with intricate character studies, shining a vital light on female resilience, sacrifice, and unbreakable solidarity amidst the devastation of occupation.
+                The narrative moves with a propulsive rhythm, balancing harrowing danger with profound human connection and solidarity. The characters are fiercely resilient, stepping up to extraordinary challenges when everything is on the line.
             </p>
             <p>
-                A compelling and emotional tribute to ordinary women performing extraordinary acts of heroism.
+                A stirring, beautifully written tribute to unsung heroines and the unbreakable bonds forged in the darkest of times.
             </p>
         </div>
 

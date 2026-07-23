@@ -1,0 +1,265 @@
+:root {
+    --bg-color: #0f172a;
+    --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
+    --bg-size: 32px 32px;
+    
+    --text-color: #ece3d0;
+    --text-opacity: 0.85;
+    --border-color: rgba(236, 227, 208, 0.15);
+    --gold-date: #d4af37;
+}
+
+body.light-mode {
+    --bg-color: #f7f4ec;
+    --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
+    --bg-size: 32px 32px;
+
+    --text-color: #2c2925;
+    --text-opacity: 0.9;
+    --border-color: rgba(44, 41, 37, 0.15);
+    --gold-date: #b8860b;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: var(--bg-texture);
+    background-size: var(--bg-size);
+    
+    font-family: "Cormorant Garamond", Georgia, serif;
+    color: var(--text-color);
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 0 50px;
+    line-height: 2.0;
+    font-size: 1.4rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 90px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 45px;
+}
+
+.site-branding {
+    text-align: left;
+}
+
+.site-title {
+    font-size: 2.9rem;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    margin: 0;
+    font-style: italic;
+    color: var(--text-color);
+    text-decoration: none;
+    display: inline-block;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.6rem;
+}
+
+header nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    opacity: 0.75;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+header nav a:hover {
+    opacity: 1;
+    color: #e6c567;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.6rem;
+    opacity: 0.8;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    opacity: 1;
+    color: #e6c567;
+}
+
+.gold-accent {
+    background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Bookshelf Layout with Covers */
+.month-group {
+    margin-bottom: 60px;
+}
+
+.month-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 25px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.book-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.book-item:last-child {
+    border-bottom: none;
+}
+
+.book-cover {
+    width: 60px;
+    object-fit: contain;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.book-item:hover .book-cover {
+    transform: scale(1.03);
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.book-title-link {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 400;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+}
+
+.book-title-link:hover {
+    color: #e6c567;
+}
+
+.book-author {
+    font-size: 1.1rem;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.book-rating {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-date);
+    white-space: nowrap;
+}
+
+/* Review Pages Specific Styles */
+.review-header {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.review-cover {
+    width: 160px;
+    object-fit: contain; 
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.review-meta-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.2;
+    margin: 0 0 10px 0;
+}
+
+.review-author {
+    font-size: 1.3rem;
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+.review-rating-date {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-date);
+    display: flex;
+    gap: 20px;
+}
+
+.featured-quote {
+    margin: 50px 0;
+    padding: 30px 40px;
+    border-left: 2px solid var(--gold-date);
+    background: rgba(212, 175, 55, 0.03);
+    font-style: italic;
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+.review-body p {
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 60px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    color: var(--text-color);
+    opacity: 0.7;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.back-link:hover {
+    opacity: 1;
+    color: #e6c567;
+}

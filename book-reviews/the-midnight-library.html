@@ -4,114 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Midnight Library | Bluebound Ink</title>
+    <!-- Importing Cormorant Garamond from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
-            --bg-size: 32px 32px;
-            --text-color: #ece3d0;
-            --border-color: rgba(236, 227, 208, 0.15);
-            --gold-date: #d4af37;
-        }
-        body.light-mode {
-            --bg-color: #f7f4ec;
-            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
-            --text-color: #2c2925;
-            --border-color: rgba(44, 41, 37, 0.15);
-            --gold-date: #b8860b;
-        }
-        body {
-            background-color: var(--bg-color);
-            background-image: var(--bg-texture);
-            background-size: var(--bg-size);
-            font-family: "Cormorant Garamond", Georgia, serif;
-            color: var(--text-color);
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 0 50px;
-            line-height: 2.0;
-            font-size: 1.4rem;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 70px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 45px;
-        }
-        .site-title { font-size: 2.9rem; font-weight: 500; font-style: italic; color: var(--text-color); text-decoration: none; }
-        header nav { display: flex; align-items: center; gap: 40px; font-size: 1.6rem; }
-        header nav a { text-decoration: none; color: var(--text-color); opacity: 0.75; }
-        header nav a:hover { opacity: 1; color: #e6c567; }
-        .theme-toggle { background: none; border: none; color: var(--text-color); cursor: pointer; font-size: 1.6rem; }
-        .gold-accent {
-            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .review-header {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .review-cover { width: 160px; object-fit: contain; border-radius: 4px; border: 1px solid var(--border-color); }
-        .review-book-title { font-size: 2.4rem; font-weight: 500; font-style: italic; margin: 0 0 10px 0; }
-        .review-author { font-size: 1.3rem; opacity: 0.7; margin-bottom: 20px; }
-        .review-rating-date {
-            font-family: -apple-system, sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gold-date);
-            display: flex;
-            gap: 20px;
-        }
-        .featured-quote {
-            margin: 50px 0;
-            padding: 30px 40px;
-            border-left: 2px solid var(--gold-date);
-            background: rgba(212, 175, 55, 0.03);
-            font-style: italic;
-            font-size: 1.6rem;
-        }
-        .review-body p { margin-bottom: 30px; text-align: justify; }
-        .back-link {
-            display: inline-block;
-            margin-top: 60px;
-            font-family: -apple-system, sans-serif;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            text-decoration: none;
-            color: var(--text-color);
-            opacity: 0.7;
-        }
-        .back-link:hover { opacity: 1; color: #e6c567; }
-    </style>
+    <!-- External Global Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+
     <header>
-        <h1 class="site-title"><a href="../blog.html" style="color: inherit; text-decoration: none;">Bound <span class="gold-accent">Ink</span></a></h1>
+        <div class="site-branding">
+            <h1 class="site-title"><a href="../blog.html" style="color: inherit; text-decoration: none;">Bluebound <span class="gold-accent">Ink</span></a></h1>
+        </div>
         <nav>
             <a href="../books.html" style="opacity: 1; color: #e6c567;">Books</a>
             <a href="../music.html">Music</a>
             <a href="../about.html">About</a>
-            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙</button>
+            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
         </nav>
     </header>
+
     <main>
         <div class="review-header">
             <img src="../images/midnight-library.jpg" alt="The Midnight Library cover" class="review-cover">
             <div class="review-meta-info">
-                <h2 class="review-book-title">The Midnight Library (Reread)</h2>
+                <h2 class="review-book-title">The Midnight Library (reread)</h2>
                 <div class="review-author">by Matt Haig</div>
                 <div class="review-rating-date">
                     <span>★ 3.85 / 5</span>
@@ -120,24 +39,47 @@
                 </div>
             </div>
         </div>
+
         <blockquote class="featured-quote">
             "The only way to learn is to live."
         </blockquote>
+
         <div class="review-body">
             <p>
-                A comforting reread exploring the infinite possibilities of life, regret, and what makes existence truly worth living. 
+                Matt Haig’s comforting and philosophical novel explores the infinite possibilities of regret and choice. Situated between life and death stands the Midnight Library, a place where every book provides an opportunity to try out another life you could have lived if you had made different choices.
             </p>
             <p>
-                Revisiting Matt Haig’s library between life and death offers a fresh perspective on how minor choices compound into entire destinies, emphasizing that perfection is an illusion.
+                Nora Seed navigates through careers she abandoned, relationships she let slip away, and dreams she never pursued, searching for the perfect existence. Revisiting the story offers a gentle reminder about perspective, mental health, and how the ordinary flaws of our current lives are often what make them worth living.
+            </p>
+            <p>
+                A warm, contemplative fable on gratitude, second chances, and the beauty found in the life we already have.
             </p>
         </div>
+
         <a href="../books.html" class="back-link">&larr; Back to Reading Log</a>
     </main>
+
     <script>
-        const btn = document.getElementById('themeToggleBtn');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+
         function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            btn.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeToggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeToggleBtn.textContent = '🌙';
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeToggleBtn.textContent = '☀️';
+        } else {
+            themeToggleBtn.textContent = '🌙';
         }
     </script>
 </body>

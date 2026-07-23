@@ -4,109 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piranesi | Bluebound Ink</title>
+    <!-- Importing Cormorant Garamond from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
-            --bg-size: 32px 32px;
-            --text-color: #ece3d0;
-            --border-color: rgba(236, 227, 208, 0.15);
-            --gold-date: #d4af37;
-        }
-        body.light-mode {
-            --bg-color: #f7f4ec;
-            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
-            --text-color: #2c2925;
-            --border-color: rgba(44, 41, 37, 0.15);
-            --gold-date: #b8860b;
-        }
-        body {
-            background-color: var(--bg-color);
-            background-image: var(--bg-texture);
-            background-size: var(--bg-size);
-            font-family: "Cormorant Garamond", Georgia, serif;
-            color: var(--text-color);
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 0 50px;
-            line-height: 2.0;
-            font-size: 1.4rem;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 70px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 45px;
-        }
-        .site-title { font-size: 2.9rem; font-weight: 500; font-style: italic; color: var(--text-color); text-decoration: none; }
-        header nav { display: flex; align-items: center; gap: 40px; font-size: 1.6rem; }
-        header nav a { text-decoration: none; color: var(--text-color); opacity: 0.75; }
-        header nav a:hover { opacity: 1; color: #e6c567; }
-        .theme-toggle { background: none; border: none; color: var(--text-color); cursor: pointer; font-size: 1.6rem; }
-        .gold-accent {
-            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .review-header {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .review-cover { width: 160px; object-fit: contain; border-radius: 4px; border: 1px solid var(--border-color); }
-        .review-book-title { font-size: 2.4rem; font-weight: 500; font-style: italic; margin: 0 0 10px 0; }
-        .review-author { font-size: 1.3rem; opacity: 0.7; margin-bottom: 20px; }
-        .review-rating-date {
-            font-family: -apple-system, sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gold-date);
-            display: flex;
-            gap: 20px;
-        }
-        .featured-quote {
-            margin: 50px 0;
-            padding: 30px 40px;
-            border-left: 2px solid var(--gold-date);
-            background: rgba(212, 175, 55, 0.03);
-            font-style: italic;
-            font-size: 1.6rem;
-        }
-        .review-body p { margin-bottom: 30px; text-align: justify; }
-        .back-link {
-            display: inline-block;
-            margin-top: 60px;
-            font-family: -apple-system, sans-serif;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            text-decoration: none;
-            color: var(--text-color);
-            opacity: 0.7;
-        }
-        .back-link:hover { opacity: 1; color: #e6c567; }
-    </style>
+    <!-- External Global Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+
     <header>
-        <h1 class="site-title"><a href="../blog.html" style="color: inherit; text-decoration: none;">Bound <span class="gold-accent">Ink</span></a></h1>
+        <div class="site-branding">
+            <h1 class="site-title"><a href="../blog.html" style="color: inherit; text-decoration: none;">Bluebound <span class="gold-accent">Ink</span></a></h1>
+        </div>
         <nav>
             <a href="../books.html" style="opacity: 1; color: #e6c567;">Books</a>
             <a href="../music.html">Music</a>
             <a href="../about.html">About</a>
-            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙</button>
+            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
         </nav>
     </header>
+
     <main>
         <div class="review-header">
             <img src="../images/piranesi.jpg" alt="Piranesi cover" class="review-cover">
@@ -120,24 +39,47 @@
                 </div>
             </div>
         </div>
+
         <blockquote class="featured-quote">
             "The Beauty of the House is immeasurable; its Kindness infinite."
         </blockquote>
+
         <div class="review-body">
             <p>
-                Susanna Clarke’s wondrous novel presents a labyrinthine world filled with endless halls of classical statues and a roaring ocean contained within. 
+                Susanna Clarke crafts a breathtakingly original, dreamlike fantasy set inside a boundless labyrinth known as the House. Filled with thousands of statues, echoing halls, and an ocean that rushes through the lower corridors, the House is the entire world to Piranesi, its gentle and observant inhabitant who records its tides, wonders, and mysteries with innocent awe.
             </p>
             <p>
-                Piranesi’s innocent, gentle perspective turns what could be a dark psychological mystery into a breathtaking exploration of solitude, beauty, and discovering wonder in a complex universe.
+                As Piranesi’s journals unfold, a darker reality emerges concerning the only other living person in the House, leading to a suspenseful and deeply moving mystery of identity, cruelty, and reclamation. Clarke’s prose is luminous, peaceful, and entirely spellbinding from start to finish.
+            </p>
+            <p>
+                A sublime, exquisitely tender triumph of speculative fiction that feels like stepping into another dimension.
             </p>
         </div>
+
         <a href="../books.html" class="back-link">&larr; Back to Reading Log</a>
     </main>
+
     <script>
-        const btn = document.getElementById('themeToggleBtn');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+
         function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            btn.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeToggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeToggleBtn.textContent = '🌙';
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeToggleBtn.textContent = '☀️';
+        } else {
+            themeToggleBtn.textContent = '🌙';
         }
     </script>
 </body>
