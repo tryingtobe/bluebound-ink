@@ -34,6 +34,9 @@
         </section>
     </main>
 
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
     <!-- Theme Toggle Script -->
     <script>
         const themeToggle = document.getElementById('themeToggle');
@@ -55,6 +58,15 @@
                 themeIcon.textContent = '☀️';
             }
         });
+    </script>
+
+    <!-- Script to Load footer.html Dynamically -->
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
     </script>
 
     <!-- External JavaScript File for Spotify Live Updates -->
