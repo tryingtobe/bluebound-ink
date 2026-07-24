@@ -173,7 +173,7 @@
             color: #e6c567;
         }
 
-        /* Footer Styles (Integrated inside document flow to perfectly match background) */
+        /* Fixed Footer Styles (Contained cleanly within layout flow) */
         .site-footer {
             width: 100%;
             background-color: var(--bg-color);
@@ -184,15 +184,12 @@
             margin-top: 100px;
             border-top: 1px solid var(--border-color);
             font-family: "Cormorant Garamond", Georgia, serif;
-            position: relative;
-            left: -50px; /* Pulls footer out to cover the body padding width */
-            width: calc(100% + 100px); /* Expands full width of the 900px box plus paddings */
         }
 
         .footer-container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 0 50px;
+            padding: 0;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -301,7 +298,7 @@
         .footer-bottom {
             max-width: 900px;
             margin: 50px auto 0 auto;
-            padding: 25px 50px 0 50px;
+            padding-top: 25px;
             border-top: 1px solid var(--border-color);
             text-align: center;
             font-size: 1rem;
