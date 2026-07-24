@@ -1,7 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getFirestore } = require('firebase-admin/firestore');
 require('dotenv').config();
+
+// Initialize Firebase Admin using the service account key file
+const serviceAccount = require('./serviceAccountKey.json');
+
+initializeApp({
+  credential: cert(serviceAccount)
+});
+
+const db = getFirestore();
 
 const app = express();
 app.use(cors());
@@ -67,17 +78,35 @@ app.get('/api/now-playing', async (req, res) => {
     }
 });
 
-// Newsletter subscription endpoint
-app.post('/api/subscribe', (req, res) => {
-    const { email } = req.body;
+// Newsletter subscription endpoint with Firestore integration
+app.post('/api/subscribe', async (req, res) => {
+    try {
+        const { email } = req.body;
 
-    if (!email || !email.includes('@')) {
-        return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
+        if (!email || !email.includes('@')) {
+            return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
+        }
+
+        // Use the email address as the document ID to easily prevent duplicates
+        const subscriberRef = db.collection('subscribers').doc(email);
+        const doc = await subscriberRef.get();
+
+        if (doc.exists) {
+            return res.json({ success: false, message: "You are already subscribed!" });
+        }
+
+        // Save email and timestamp to Firestore
+        await subscriberRef.set({
+            email: email,
+            subscribedAt: new Date().toISOString()
+        });
+
+        console.log(`New subscriber successfully saved: ${email}`);
+        return res.status(200).json({ success: true, message: "You're successfully subscribed!" });
+    } catch (error) {
+        console.error("Firestore Error:", error);
+        res.status(500).json({ success: false, message: "Something went wrong. Please try again later." });
     }
-
-    console.log(`New subscriber email received: ${email}`);
-
-    return res.status(200).json({ success: true, message: "You're successfully subscribed!" });
 });
 
 // Temporary route to catch the Spotify authorization code
