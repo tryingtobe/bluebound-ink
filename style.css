@@ -1,4 +1,4 @@
-::root {
+:root {
     --bg-color: #0f172a;
     --text-color: #ece3d0;
     --text-opacity: 0.85;
@@ -16,7 +16,6 @@ body.light-mode {
 
 body {
     background-color: var(--bg-color);
-    
     font-family: "Sabon MT W02", Georgia, serif;
     color: var(--text-color);
     max-width: 900px;
@@ -25,18 +24,19 @@ body {
     line-height: 1.8;
     font-size: 1.25rem;
     font-weight: 500;
-    letter-spacing: 0.02em; /* Adds a subtle space between letters */
+    letter-spacing: 0.02em;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Header Layout */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 90px;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 45px;
+    padding: 20px 0 45px 0;
 }
 
 .site-branding {
@@ -96,6 +96,88 @@ header nav a:hover {
     background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* Now Playing Card Styling */
+.now-playing-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    max-width: 280px;
+}
+
+/* Spinning Vinyl Wrapper */
+.vinyl-wrapper {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+.vinyl-disc {
+    width: 100%;
+    height: 100%;
+    background: #111;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Center of the Vinyl / Album Art Container */
+.album-art-center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--gold-date);
+}
+
+.album-art-center img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Track Info Text Stack */
+.now-playing-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.track-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: inherit;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.artist-name {
+    font-size: 0.75rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /* Bookshelf Layout with Covers */
@@ -257,4 +339,82 @@ header nav a:hover {
 .back-link:hover {
     opacity: 1;
     color: #e6c567;
+}
+
+/* Favorite Albums Shelf Grid */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+}
+
+.album-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.album-cover-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    opacity: 0.5;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.album-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.album-artist {
+    font-size: 0.95rem;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* Monthly Playlist Section */
+.monthly-entry {
+    margin-bottom: 40px;
+}
+
+.playlist-month-heading {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.playlist-description {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.playlist-wrapper {
+    margin: 30px 0;
+}
+
+.playlist-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.playlist-container:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
 }

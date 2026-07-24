@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Bluebound Ink</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header with Spinning Now Playing Card -->
+    <header>
+        <div class="site-branding">
+            <a href="books.html" class="site-title">Bluebound Ink</a>
+        </div>
+        
+ 
+
+        <nav>
+            <a href="books.html">Books</a>
+            <a href="music.html">Music</a>
+            <a href="about.html" class="gold-accent">About</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">☀️</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Area for Your About Page -->
+    <main>
+        <section class="month-group">
+            <h1 class="month-title">About</h1>
+            <p>Your about page content goes here...</p>
+        </section>
+    </main>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.textContent = '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeIcon.textContent = '🌙';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.textContent = '☀️';
+            }
+        });
+    </script>
+
+    <!-- External JavaScript File for Spotify Live Updates -->
+    <script src="script.js"></script>
+</body>
+</html>
