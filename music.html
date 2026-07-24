@@ -3,172 +3,528 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soundtrack — Bluebound Ink</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Music | Bluebound Ink</title>
+    <!-- Importing Cormorant Garamond from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
+            --bg-size: 32px 32px;
+            
+            --text-color: #ece3d0;
+            --text-opacity: 0.85;
+            --border-color: rgba(236, 227, 208, 0.15);
+            --gold-date: #d4af37;
+        }
+
+        body.light-mode {
+            --bg-color: #f7f4ec;
+            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
+            --bg-size: 32px 32px;
+
+            --text-color: #2c2925;
+            --text-opacity: 0.9;
+            --border-color: rgba(44, 41, 37, 0.15);
+            --gold-date: #b8860b;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            background-size: var(--bg-size);
+            
+            font-family: "Sabon MT W02", Georgia, serif;
+            color: var(--text-color);
+            max-width: 900px;
+            margin: 100px auto 0 auto;
+            padding: 0 50px;
+            line-height: 1.8;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Clean Header Layout */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 70px;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0 35px 0;
+        }
+
+        .site-branding {
+            text-align: left;
+        }
+
+        .site-title {
+            font-size: 2.9rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin: 0;
+            font-style: italic;
+            color: var(--text-color);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 1.5rem;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            opacity: 0.75;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        header nav a:hover {
+            opacity: 1;
+            color: #e6c567;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            opacity: 1;
+            color: #e6c567;
+        }
+
+        .gold-accent {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-section-title {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        /* Now Playing Card Styling */
+        .now-playing-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            max-width: 260px;
+        }
+
+        .vinyl-wrapper {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+
+        .vinyl-disc {
+            width: 100%;
+            height: 100%;
+            background: #111;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .album-art-center {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .album-art-center img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .now-playing-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .track-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: inherit;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .artist-name {
+            font-size: 0.7rem;
+            color: var(--text-color);
+            opacity: 0.6;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        /* Monthly Playlist Section Styles */
+        .monthly-entry {
+            margin-bottom: 50px;
+        }
+
+        .playlist-month-heading {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .playlist-wrapper {
+            margin: 20px 0 40px 0;
+        }
+
+        .playlist-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .playlist-container:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            width: 100%;
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            background-size: var(--bg-size);
+            color: var(--text-color);
+            padding: 70px 0 40px 0;
+            margin-top: 100px;
+            border-top: 1px solid var(--border-color);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            position: relative;
+            left: -50px;
+            width: calc(100% + 100px);
+        }
+
+        .footer-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            font-style: italic;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+        }
+
+        .footer-col h4 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin: 0 0 15px 0;
+            color: var(--gold-date);
+        }
+
+        .footer-col p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.75;
+            margin: 0 0 15px 0;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.3rem;
+            opacity: 0.75;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .footer-col ul li a:hover {
+            opacity: 1;
+            color: #e6c567;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .subscribe-form input[type="email"] {
+            padding: 10px 14px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--text-color);
+            flex: 1;
+            font-size: 1.1rem;
+            font-family: "Cormorant Garamond", Georgia, serif;
+        }
+
+        .subscribe-form input[type="email"]::placeholder {
+            color: var(--text-color);
+            opacity: 0.4;
+        }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--gold-date);
+            color: var(--bg-color);
+            font-weight: 600;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: opacity 0.2s ease;
+        }
+
+        .subscribe-form button:hover {
+            opacity: 0.85;
+        }
+
+        .form-message {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            max-width: 900px;
+            margin: 50px auto 0 auto;
+            padding: 25px 50px 0 50px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header with Spinning Player in Upper Right -->
     <header>
         <div class="site-branding">
-            <a href="books.html" class="site-title">Bluebound Ink</a>
+            <h1 class="site-title"><a href="index.html" style="color: inherit; text-decoration: none;">Bluebound <span class="gold-accent">Ink</span></a></h1>
         </div>
         
-        <!-- Now Playing Card in Header -->
-        <div class="now-playing-card">
+        <!-- Now Playing Vinyl Widget -->
+        <div class="now-playing-card" id="now-playing">
             <div class="vinyl-wrapper">
-                <div class="vinyl-disc"></div>
-                <div class="album-art-center">♫</div>
+                <div class="vinyl-disc" id="disc">
+                    <div class="album-art-center"><img id="album-art" src="" alt="Album Art"></div>
+                </div>
             </div>
             <div class="now-playing-info">
-                <span class="track-name">Loading...</span>
-                <span class="artist-name">Spotify</span>
+                <div class="track-name" id="track-name">Loading...</div>
+                <div class="artist-name" id="artist-name"></div>
             </div>
         </div>
 
         <nav>
             <a href="books.html">Books</a>
-            <a href="music.html" class="gold-accent">Music</a>
+            <a href="music.html">Music</a>
             <a href="about.html">About</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <span id="themeIcon">☀️</span>
-            </button>
+            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
         </nav>
     </header>
 
-    <!-- Main Content Area -->
     <main>
-
-        <!-- 1. Favorite Albums Shelf -->
-        <section class="month-group">
-            <div class="month-title">Favorite Albums</div>
-            <div class="album-grid">
-                <!-- Album 1 -->
-                <div class="album-item">
-                    <div class="album-cover-placeholder">Album Art</div>
-                    <div class="album-title">Album Title</div>
-                    <div class="album-artist">Artist Name</div>
-                </div>
-                <!-- Album 2 -->
-                <div class="album-item">
-                    <div class="album-cover-placeholder">Album Art</div>
-                    <div class="album-title">Album Title</div>
-                    <div class="album-artist">Artist Name</div>
-                </div>
-                <!-- Album 3 -->
-                <div class="album-item">
-                    <div class="album-cover-placeholder">Album Art</div>
-                    <div class="album-title">Album Title</div>
-                    <div class="album-artist">Artist Name</div>
-                </div>
+        <h2 class="page-section-title gold-accent">Music & Soundtracks</h2>
+        
+        <!-- December 2025 Playlists -->
+        <div class="monthly-entry">
+            <h3 class="playlist-month-heading">December 2025</h3>
+            <div class="playlist-container">
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2TwmgJ3o3dwSLUXWEmy9WU?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
-        </section>
-
-        <!-- 2. Monthly Playlists & Recommendations (Dec 2025 Onward) -->
-        <section class="month-group">
-            <div class="month-title">Monthly Soundtracks</div>
-
-            <!-- July 2026 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">July 2026</h3>
-                <p class="playlist-description">Mid-summer writing sessions and late-night chapter drafts.</p>
-                <div class="playlist-container">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
+            <div class="playlist-container" style="margin-top: 20px;">
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5xlm3oJxYwVHPAFtyDbdb9?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
-
-            <!-- June 2026 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">June 2026</h3>
-                <p class="playlist-description">Coffee shop mapping tracks and ambient focus scores.</p>
-                <div class="playlist-container">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-
-            <!-- May 2026 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">May 2026</h3>
-                <p class="playlist-description">Sprint workflows, transition records, and rainy afternoon loops.</p>
-                <div class="playlist-container">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-
-            <!-- April 2026 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">April 2026</h3>
-                <div class="playlist-container">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-
-            <!-- March 2026 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">March 2026</h3>
-                <div class="playlist-container">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-
-            <!-- February 2026 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">February 2026</h3>
-                <div class="playlist-container">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-
-            <!-- January 2026 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">January 2026</h3>
-                <div class="playlist-container">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-
-          <!-- December 2025 -->
-            <div class="monthly-entry">
-                <h3 class="playlist-month-heading">December 2025</h3>
-                
-                <!-- First Playlist -->
-                <div class="playlist-container">
-                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2TwmgJ3o3dwSLUXWEmy9WU?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-
-                <!-- Second Playlist -->
-                <div class="playlist-container" style="margin-top: 20px;">
-                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5xlm3oJxYwVHPAFtyDbdb9?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-
-        </section>
+        </div>
     </main>
 
-    <!-- Theme Toggle Script -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Bluebound Ink</h3>
+                <p>A personal space for books, music, and creative explorations.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="books.html">Books</a></li>
+                    <li><a href="music.html">Music</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Stay Updated</h4>
+                <p>Get new posts and updates sent straight to your inbox.</p>
+                <form id="subscribe-form" class="subscribe-form">
+                    <input type="email" id="subscriber-email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p id="form-message" class="form-message"></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bluebound Ink. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const body = document.body;
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
 
-        if (localStorage.getItem('theme') === 'light') {
-            body.classList.add('light-mode');
-            themeIcon.textContent = '🌙';
-        }
-
-        themeToggle.addEventListener('click', () => {
+        function toggleTheme() {
+            const body = document.body;
             body.classList.toggle('light-mode');
+            
             if (body.classList.contains('light-mode')) {
                 localStorage.setItem('theme', 'light');
-                themeIcon.textContent = '🌙';
+                themeToggleBtn.textContent = '☀️';
             } else {
                 localStorage.setItem('theme', 'dark');
-                themeIcon.textContent = '☀️';
+                themeToggleBtn.textContent = '🌙';
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeToggleBtn.textContent = '☀️';
+        } else {
+            themeToggleBtn.textContent = '🌙';
+        }
+
+        document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('subscriber-email').value;
+            const messageEl = document.getElementById('form-message');
+
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = "green";
+                    document.getElementById('subscriber-email').value = '';
+                } else {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = "red";
+                }
+            } catch (error) {
+                messageEl.textContent = "Something went wrong. Please try again later.";
+                messageEl.style.color = "red";
             }
         });
-    </script>
+        async function fetchNowPlaying() {
+    try {
+        const response = await fetch('/api/now-playing');
+        const data = await response.json();
 
-    <!-- External JavaScript File for Spotify Live Updates -->
-    <script src="script.js"></script>
+        if (data && data.item) {
+            document.getElementById('track-name').textContent = data.item.name;
+            document.getElementById('artist-name').textContent = data.item.artists.map(artist => artist.name).join(', ');
+            
+            const albumArtUrl = data.item.album.images[0]?.url;
+            if (albumArtUrl) {
+                document.getElementById('album-art').src = albumArtUrl;
+            }
+        } else {
+            document.getElementById('track-name').textContent = "Not playing";
+            document.getElementById('artist-name').textContent = "Spotify paused";
+        }
+    } catch (error) {
+        document.getElementById('track-name').textContent = "Offline";
+        document.getElementById('artist-name').textContent = "Could not load track";
+    }
+}
+
+// Fetch on page load and refresh every 10 seconds
+fetchNowPlaying();
+setInterval(fetchNowPlaying, 10000);
+    </script>
 </body>
 </html>

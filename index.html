@@ -37,13 +37,16 @@
             background-image: var(--bg-texture);
             background-size: var(--bg-size);
             
-            font-family: "Cormorant Garamond", Georgia, serif;
+            font-family: "Sabon MT W02", Georgia, serif;
             color: var(--text-color);
             max-width: 900px;
-            margin: 100px auto;
+            margin: 100px auto 0 auto;
             padding: 0 50px;
-            line-height: 2.0;
-            font-size: 1.4rem;
+            line-height: 1.8;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
@@ -53,7 +56,7 @@
             align-items: center;
             margin-bottom: 90px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 45px;
+            padding: 20px 0 45px 0;
         }
 
         .site-branding {
@@ -109,7 +112,6 @@
             color: #e6c567;
         }
 
-        /* Metallic gold gradient used for "Ink" and the "LATEST POSTS" heading */
         .gold-accent {
             background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
             -webkit-background-clip: text;
@@ -129,6 +131,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            margin-bottom: 80px;
         }
 
         .post-item {
@@ -141,7 +144,6 @@
             padding-bottom: 0;
         }
 
-        /* Header layout for post title and date on the same line */
         .post-header {
             display: flex;
             justify-content: space-between;
@@ -170,6 +172,141 @@
         .post-title:hover {
             color: #e6c567;
         }
+
+        /* Footer Styles (Integrated inside document flow to perfectly match background) */
+        .site-footer {
+            width: 100%;
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            background-size: var(--bg-size);
+            color: var(--text-color);
+            padding: 70px 0 40px 0;
+            margin-top: 100px;
+            border-top: 1px solid var(--border-color);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            position: relative;
+            left: -50px; /* Pulls footer out to cover the body padding width */
+            width: calc(100% + 100px); /* Expands full width of the 900px box plus paddings */
+        }
+
+        .footer-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            font-style: italic;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+        }
+
+        .footer-col h4 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin: 0 0 15px 0;
+            color: var(--gold-date);
+        }
+
+        .footer-col p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.75;
+            margin: 0 0 15px 0;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.3rem;
+            opacity: 0.75;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .footer-col ul li a:hover {
+            opacity: 1;
+            color: #e6c567;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .subscribe-form input[type="email"] {
+            padding: 10px 14px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--text-color);
+            flex: 1;
+            font-size: 1.1rem;
+            font-family: "Cormorant Garamond", Georgia, serif;
+        }
+
+        .subscribe-form input[type="email"]::placeholder {
+            color: var(--text-color);
+            opacity: 0.4;
+        }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--gold-date);
+            color: var(--bg-color);
+            font-weight: 600;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: opacity 0.2s ease;
+        }
+
+        .subscribe-form button:hover {
+            opacity: 0.85;
+        }
+
+        .form-message {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            max-width: 900px;
+            margin: 50px auto 0 auto;
+            padding: 25px 50px 0 50px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -190,7 +327,6 @@
         <h2 class="posts-section-title gold-accent">Latest Posts</h2>
         
         <div class="post-list">
-            <!-- Example Post Entry 1 (Latest) -->
             <article class="post-item">
                 <div class="post-header">
                     <h2><a class="post-title" href="post-single.html">On clearing the desk and starting over</a></h2>
@@ -198,7 +334,6 @@
                 </div>
             </article>
 
-            <!-- Example Post Entry 2 (Older) -->
             <article class="post-item">
                 <div class="post-header">
                     <h2><a class="post-title" href="post-single.html">The architecture of quiet spaces</a></h2>
@@ -207,6 +342,36 @@
             </article>
         </div>
     </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Bluebound Ink</h3>
+                <p>A personal space for books, music, and creative explorations.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="books.html">Books</a></li>
+                    <li><a href="music.html">Music</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Stay Updated</h4>
+                <p>Get new posts and updates sent straight to your inbox.</p>
+                <form id="subscribe-form" class="subscribe-form">
+                    <input type="email" id="subscriber-email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p id="form-message" class="form-message"></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bluebound Ink. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -224,14 +389,39 @@
             }
         }
 
-        // Check saved theme on load
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
             themeToggleBtn.textContent = '☀️';
         } else {
             themeToggleBtn.textContent = '🌙';
         }
-    </script>
 
+        document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('subscriber-email').value;
+            const messageEl = document.getElementById('form-message');
+
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = "green";
+                    document.getElementById('subscriber-email').value = '';
+                } else {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = "red";
+                }
+            } catch (error) {
+                messageEl.textContent = "Something went wrong. Please try again later.";
+                messageEl.style.color = "red";
+            }
+        });
+    </script>
 </body>
 </html>

@@ -67,6 +67,19 @@ app.get('/api/now-playing', async (req, res) => {
     }
 });
 
+// Newsletter subscription endpoint
+app.post('/api/subscribe', (req, res) => {
+    const { email } = req.body;
+
+    if (!email || !email.includes('@')) {
+        return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
+    }
+
+    console.log(`New subscriber email received: ${email}`);
+
+    return res.status(200).json({ success: true, message: "You're successfully subscribed!" });
+});
+
 // Temporary route to catch the Spotify authorization code
 app.get('/callback', (req, res) => {
     const code = req.query.code || null;
