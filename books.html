@@ -257,9 +257,21 @@
                 </article>
             </div>
         </div>
-
     </main>
 
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+   <div style="text-align: center; padding: 20px; font-family: Georgia, serif; font-size: 0.9rem; color: #666; border-top: 1px solid #eaeaea; margin-top: 40px;">
+        <p>&copy; 2026 Bluebound Ink. All rights reserved.</p>
+        <div style="margin-top: 10px;">
+            <a href="/privacy/privacy.html" style="color: #666; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+            <a href="/privacy/terms.html" style="color: #666; text-decoration: none; margin: 0 10px;">Terms of Service</a> | 
+            <a href="/privacy/ai-usage.html" style="color: #666; text-decoration: none; margin: 0 10px;">AI Usage Policy</a>
+        </div>
+    </div>
+
+    <!-- Script to Load footer.html Dynamically & Handle Themes -->
     <script>
         const themeToggleBtn = document.getElementById('themeToggleBtn');
 
@@ -282,12 +294,7 @@
         } else {
             themeToggleBtn.textContent = '🌙';
         }
-    </script>
-    <!-- Footer Placeholder -->
-    <div id="footer-placeholder"></div>
 
-    <!-- Script to Load footer.html Dynamically -->
-    <script>
         fetch('footer.html')
             .then(response => response.text())
             .then(data => {

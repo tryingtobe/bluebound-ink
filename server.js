@@ -64,7 +64,7 @@ const getAccessToken = async () => {
     return response.data.access_token;
 };
 
-// API Endpoint for frontend to fetch current song
+// API Endpoint for frontend to fetch current song (with detailed error logs)
 app.get('/api/now-playing', async (req, res) => {
     try {
         const access_token = await getAccessToken();
@@ -86,28 +86,12 @@ app.get('/api/now-playing', async (req, res) => {
             albumImageUrl: song.item.album.images[0].url
         });
     } catch (error) {
-        console.error("Spotify API Error:", error.message);
-        res.status(500).json({ error: 'Failed to fetch currently playing track' });
-    }
-});
-
-// Example endpoint that triggers a test email via Resend
-app.post('/api/send-email', async (req, res) => {
-    try {
-        const { data, error } = await resend.emails.send({
-            from: 'onboarding@resend.dev', 
-            to: 'delivered@resend.dev',     
-            subject: 'Hello from Bluebound Ink!',
-            html: '<p>Congrats! Your email system is working.</p>'
-        });
-
-        if (error) {
-            return res.status(400).json({ error });
+        console.error("Spotify API Error Message:", error.message);
+        if (error.response) {
+            console.error("Spotify Response Status:", error.response.status);
+            console.error("Spotify Response Data:", JSON.stringify(error.response.data, null, 2));
         }
-
-        res.status(200).json({ success: true, data });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ error: 'Failed to fetch currently playing track' });
     }
 });
 
@@ -120,16 +104,13 @@ app.post('/api/subscribe', async (req, res) => {
             return res.status(400).json({ success: false, message: "Email is required." });
         }
 
-        // Reference to Firestore collection
         const subscriberRef = db.collection('subscribers').doc(email);
 
-        // Save email and timestamp to Firestore
         await subscriberRef.set({
             email: email,
             subscribedAt: new Date().toISOString()
         });
 
-        // Define mailOptions with the clean sender display name
         const mailOptions = {
             from: {
                 name: 'Bluebound Ink',
@@ -137,23 +118,22 @@ app.post('/api/subscribe', async (req, res) => {
             },
             to: email,
             subject: 'Welcome to Bluebound Ink',
-            text: 'Thank you for subscribing to Bluebound Ink. You will receive occasional notes on creative explorations, books, and music.',
+            text: 'Thank you for subscribing to Bluebound Ink.',
             html: `
                 <div style="font-family: Georgia, serif; color: #2c2925; padding: 20px;">
                     <h2 style="font-style: italic;">Welcome to Bluebound Ink</h2>
-                    <p>Thank you for subscribing. You are now on the list to receive occasional notes on creative explorations, books, and music.</p>
+                    <p>Thank you for subscribing. You are now on the list to receive occasional notes.</p>
                     <p style="color: #888; font-size: 0.9rem; margin-top: 30px;">Bluebound Ink</p>
                 </div>
             `
         };
 
-        // Send the confirmation email
         await transporter.sendMail(mailOptions);
         console.log(`Confirmation email sent and subscriber saved: ${email}`);
 
         return res.status(200).json({ 
             success: true, 
-            message: "You're successfully subscribed! Check your inbox for a confirmation note." 
+            message: "You're successfully subscribed! Check your inbox." 
         });
 
     } catch (error) {
