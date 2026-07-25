@@ -426,7 +426,7 @@ header nav a:hover {
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Footer Styles (Seamless Background & Matching Alignment) */
+/* Footer Styles */
 .site-footer {
     width: 100%;
     background-color: var(--bg-color);
@@ -559,4 +559,72 @@ header nav a:hover {
     text-align: center;
     font-size: 1rem;
     opacity: 0.6;
+}
+
+/* Page Layout & Privacy Policy Styling Matched to Bluebound Ink */
+html, body {
+    height: 100%;
+}
+
+body.page-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px 0;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.privacy-container h1 {
+    font-size: 2.8rem;
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.last-updated {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--gold-date);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 40px;
+}
+
+.privacy-container section {
+    margin-bottom: 40px;
+}
+
+.privacy-container h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.privacy-container p, 
+.privacy-container li {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    opacity: var(--text-opacity);
+    margin-bottom: 20px;
+}
+
+.privacy-container ul {
+    padding-left: 20px;
+    list-style-type: disc;
+    margin-bottom: 20px;
+}
+
+.privacy-container li {
+    margin-bottom: 10px;
 }

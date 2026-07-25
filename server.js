@@ -4,40 +4,52 @@ const axios = require('axios');
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 require('dotenv').config();
+const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
 // Initialize Firebase Admin using the service account key file
 const serviceAccount = require('./serviceAccountKey.json');
 
 initializeApp({
-  credential: cert(serviceAccount)
+    credential: cert(serviceAccount)
+});
+const db = getFirestore();
+
+// Configure Nodemailer transporter using Gmail SMTP
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
 });
 
-const db = getFirestore();
+// Initialize Resend with your API key from .env
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 app.use(express.static(__dirname));
 
+// Routes for static HTML files
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/books.html');
 });
 
-// Added route for music.html
 app.get('/music.html', (req, res) => {
     res.sendFile(__dirname + '/music.html');
 });
 
-// Spotify Credentials from .env
+// Spotify Credentials & Endpoints from .env
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
-const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
+const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
 
-// Helper function to get a fresh Access Token using your Refresh Token
+// Helper function to get a fresh Spotify Access Token
 const getAccessToken = async () => {
     const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
     const response = await axios.post(TOKEN_ENDPOINT, new URLSearchParams({
@@ -52,7 +64,7 @@ const getAccessToken = async () => {
     return response.data.access_token;
 };
 
-// API Endpoint for your frontend to fetch current song
+// API Endpoint for frontend to fetch current song
 app.get('/api/now-playing', async (req, res) => {
     try {
         const access_token = await getAccessToken();
@@ -61,7 +73,7 @@ app.get('/api/now-playing', async (req, res) => {
                 Authorization: `Bearer ${access_token}`
             }
         });
-
+        
         if (response.status === 204 || !response.data || !response.data.item) {
             return res.json({ isPlaying: false });
         }
@@ -74,26 +86,42 @@ app.get('/api/now-playing', async (req, res) => {
             albumImageUrl: song.item.album.images[0].url
         });
     } catch (error) {
+        console.error("Spotify API Error:", error.message);
         res.status(500).json({ error: 'Failed to fetch currently playing track' });
     }
 });
 
-// Newsletter subscription endpoint with Firestore integration
+// Example endpoint that triggers a test email via Resend
+app.post('/api/send-email', async (req, res) => {
+    try {
+        const { data, error } = await resend.emails.send({
+            from: 'onboarding@resend.dev', 
+            to: 'delivered@resend.dev',     
+            subject: 'Hello from Bluebound Ink!',
+            html: '<p>Congrats! Your email system is working.</p>'
+        });
+
+        if (error) {
+            return res.status(400).json({ error });
+        }
+
+        res.status(200).json({ success: true, data });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Subscription endpoint (Saves to Firestore & sends welcome email via Nodemailer)
 app.post('/api/subscribe', async (req, res) => {
     try {
         const { email } = req.body;
 
-        if (!email || !email.includes('@')) {
-            return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
+        if (!email) {
+            return res.status(400).json({ success: false, message: "Email is required." });
         }
 
-        // Use the email address as the document ID to easily prevent duplicates
+        // Reference to Firestore collection
         const subscriberRef = db.collection('subscribers').doc(email);
-        const doc = await subscriberRef.get();
-
-        if (doc.exists) {
-            return res.json({ success: false, message: "You are already subscribed!" });
-        }
 
         // Save email and timestamp to Firestore
         await subscriberRef.set({
@@ -101,22 +129,37 @@ app.post('/api/subscribe', async (req, res) => {
             subscribedAt: new Date().toISOString()
         });
 
-        console.log(`New subscriber successfully saved: ${email}`);
-        return res.status(200).json({ success: true, message: "You're successfully subscribed!" });
+        // Define mailOptions with the clean sender display name
+        const mailOptions = {
+            from: {
+                name: 'Bluebound Ink',
+                address: process.env.EMAIL_USER
+            },
+            to: email,
+            subject: 'Welcome to Bluebound Ink',
+            text: 'Thank you for subscribing to Bluebound Ink. You will receive occasional notes on creative explorations, books, and music.',
+            html: `
+                <div style="font-family: Georgia, serif; color: #2c2925; padding: 20px;">
+                    <h2 style="font-style: italic;">Welcome to Bluebound Ink</h2>
+                    <p>Thank you for subscribing. You are now on the list to receive occasional notes on creative explorations, books, and music.</p>
+                    <p style="color: #888; font-size: 0.9rem; margin-top: 30px;">Bluebound Ink</p>
+                </div>
+            `
+        };
+
+        // Send the confirmation email
+        await transporter.sendMail(mailOptions);
+        console.log(`Confirmation email sent and subscriber saved: ${email}`);
+
+        return res.status(200).json({ 
+            success: true, 
+            message: "You're successfully subscribed! Check your inbox for a confirmation note." 
+        });
+
     } catch (error) {
-        console.error("Firestore Error:", error);
+        console.error("Subscription or Email Error:", error);
         res.status(500).json({ success: false, message: "Something went wrong. Please try again later." });
     }
-});
-
-// Temporary route to catch the Spotify authorization code
-app.get('/callback', (req, res) => {
-    const code = req.query.code || null;
-    res.send(`
-        <h2>Authorization Successful!</h2>
-        <p>Copy this code and use it in your terminal command:</p>
-        <textarea style="width:600px; height:100px; padding:10px;">${code}</textarea>
-    `);
 });
 
 const PORT = process.env.PORT || 3000;

@@ -1,10 +1,7 @@
-# Node modules
 node_modules/
-
-# Environment variables
 .env
 serviceAccountKey.json
-
-# OS files
+a.jsserviceAccountKey.json
+desktop.ini
 .DS_Store
 Thumbs.db
