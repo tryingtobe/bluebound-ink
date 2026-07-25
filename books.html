@@ -9,8 +9,328 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
-    <!-- External Global Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
+            --bg-size: 32px 32px;
+            
+            --text-color: #ece3d0;
+            --text-opacity: 0.85;
+            --border-color: rgba(236, 227, 208, 0.15);
+            --gold-date: #d4af37;
+        }
+
+        body.light-mode {
+            --bg-color: #f7f4ec;
+            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
+            --bg-size: 32px 32px;
+
+            --text-color: #2c2925;
+            --text-opacity: 0.9;
+            --border-color: rgba(44, 41, 37, 0.15);
+            --gold-date: #b8860b;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            background-size: var(--bg-size);
+            
+            font-family: "Sabon MT W02", Georgia, serif;
+            color: var(--text-color);
+            max-width: 900px;
+            margin: 100px auto 0 auto;
+            padding: 0 50px;
+            line-height: 1.8;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Clean Header Layout */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 70px;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0 35px 0;
+        }
+
+        .site-branding {
+            text-align: left;
+        }
+
+        .site-title {
+            font-size: 2.9rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin: 0;
+            font-style: italic;
+            color: var(--text-color);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 1.5rem;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            opacity: 0.75;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        header nav a:hover {
+            opacity: 1;
+            color: #e6c567;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            opacity: 1;
+            color: #e6c567;
+        }
+
+        .gold-accent {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-section-title {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 40px;
+        }
+
+        /* Book List Styles */
+        .month-group {
+            margin-bottom: 50px;
+        }
+
+        .month-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .book-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .book-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .book-cover {
+            width: 60px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .book-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .book-title-link:hover {
+            color: #e6c567;
+        }
+
+        .book-author {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .book-rating {
+            font-size: 1rem;
+            color: var(--gold-date);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            width: 100%;
+            background-color: var(--bg-color);
+            background-image: var(--bg-texture);
+            background-size: var(--bg-size);
+            color: var(--text-color);
+            padding: 70px 0 40px 0;
+            margin-top: 100px;
+            border-top: 1px solid var(--border-color);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            position: relative;
+            left: -50px;
+            width: calc(100% + 100px);
+        }
+
+        .footer-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            font-style: italic;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+        }
+
+        .footer-col h4 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin: 0 0 15px 0;
+            color: var(--gold-date);
+        }
+
+        .footer-col p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.75;
+            margin: 0 0 15px 0;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.3rem;
+            opacity: 0.75;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .footer-col ul li a:hover {
+            opacity: 1;
+            color: #e6c567;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .subscribe-form input[type="email"] {
+            padding: 10px 14px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--text-color);
+            flex: 1;
+            font-size: 1.1rem;
+            font-family: "Cormorant Garamond", Georgia, serif;
+        }
+
+        .subscribe-form input[type="email"]::placeholder {
+            color: var(--text-color);
+            opacity: 0.4;
+        }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--gold-date);
+            color: var(--bg-color);
+            font-weight: 600;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: opacity 0.2s ease;
+        }
+
+        .subscribe-form button:hover {
+            opacity: 0.85;
+        }
+
+        .form-message {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            max-width: 900px;
+            margin: 50px auto 0 auto;
+            padding: 25px 50px 0 50px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,7 +347,7 @@
     </header>
 
     <main>
-        <h2 class="posts-section-title gold-accent" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 40px;">Reading Log</h2>
+        <h2 class="page-section-title gold-accent">Reading Log</h2>
 
         <!-- June 2026 -->
         <div class="month-group">
@@ -82,196 +402,43 @@
                 </article>
             </div>
         </div>
-
-        <!-- April 2026 -->
-        <div class="month-group">
-            <h3 class="month-title gold-accent">April 2026</h3>
-            <div class="book-list">
-                <article class="book-item">
-                    <a href="book-reviews/alchemised.html">
-                        <img src="images/alchemised.jpg" alt="Alchemised cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/alchemised.html" class="book-title-link">Alchemised</a>
-                        <span class="book-author">by SenLinYu</span>
-                    </div>
-                    <div class="book-rating">★ 3.17</div>
-                </article>
-            </div>
-        </div>
-
-        <!-- March 2026 -->
-        <div class="month-group">
-            <h3 class="month-title gold-accent">March 2026</h3>
-            <div class="book-list">
-                <article class="book-item">
-                    <a href="book-reviews/the-rage-of-dragons.html">
-                        <img src="images/the-rage-of-dragons.webp" alt="The Rage of Dragons cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-rage-of-dragons.html" class="book-title-link">The Rage of Dragons (The Burning, #1)</a>
-                        <span class="book-author">by Evan Winter</span>
-                    </div>
-                    <div class="book-rating">★ 4.37</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/the-jasad-heir.html">
-                        <img src="images/the-jasad-heir.webp" alt="The Jasad Heir cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-jasad-heir.html" class="book-title-link">The Jasad Heir (The Scorched Throne, #1)</a>
-                        <span class="book-author">by Sara Hashem</span>
-                    </div>
-                    <div class="book-rating">★ 4.52</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/the-jasad-crown.html">
-                        <img src="images/the-jasad-crown.webp" alt="The Jasad Crown cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-jasad-crown.html" class="book-title-link">The Jasad Crown (The Scorched Throne, #2)</a>
-                        <span class="book-author">by Sara Hashem</span>
-                    </div>
-                    <div class="book-rating">★ 4.64</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/the-poet-empress.html">
-                        <img src="images/the-poet-empress.png" alt="The Poet Empress cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-poet-empress.html" class="book-title-link">The Poet Empress</a>
-                        <span class="book-author">by Shen Tao</span>
-                    </div>
-                    <div class="book-rating">★ 4.76</div>
-                </article>
-            </div>
-        </div>
-
-        <!-- February 2026 -->
-        <div class="month-group">
-            <h3 class="month-title gold-accent">February 2026</h3>
-            <div class="book-list">
-                <article class="book-item">
-                    <a href="book-reviews/the-burning-god.html">
-                        <img src="images/the-burning-god.webp" alt="The Burning God cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-burning-god.html" class="book-title-link">The Burning God (The Poppy War, #3)</a>
-                        <span class="book-author">by R.F. Kuang</span>
-                    </div>
-                    <div class="book-rating">★ 4.47</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/the-sword-of-kaigen.html">
-                        <img src="images/the-sword-of-kaigen.webp" alt="The Sword of Kaigen cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-sword-of-kaigen.html" class="book-title-link">The Sword of Kaigen: A Theonite War Story</a>
-                        <span class="book-author">by M.L. Wang</span>
-                    </div>
-                    <div class="book-rating">★ 4.25</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/before-i-let-go.html">
-                        <img src="images/Before-I-Let-Go.jpg" alt="Before I Let Go cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/before-i-let-go.html" class="book-title-link">Before I Let Go</a>
-                        <span class="book-author">by Kennedy Ryan</span>
-                    </div>
-                    <div class="book-rating">★ 5.00</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/the-mademoiselle-alliance.html">
-                        <img src="images/The+Mademoiselle+Alliance.webp" alt="The Mademoiselle Alliance cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-mademoiselle-alliance.html" class="book-title-link">The Mademoiselle Alliance</a>
-                        <span class="book-author">by Natasha Lester</span>
-                    </div>
-                    <div class="book-rating">★ 4.25</div>
-                </article>
-            </div>
-        </div>
-
-        <!-- January 2026 -->
-        <div class="month-group">
-            <h3 class="month-title gold-accent">January 2026</h3>
-            <div class="book-list">
-                <article class="book-item">
-                    <a href="book-reviews/the-dragon-republic.html">
-                        <img src="images/the-dragon-republic.webp" alt="The Dragon Republic cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-dragon-republic.html" class="book-title-link">The Dragon Republic (The Poppy War, #2)</a>
-                        <span class="book-author">by R.F. Kuang</span>
-                    </div>
-                    <div class="book-rating">★ 4.63</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/the-midnight-library.html">
-                        <img src="images/midnight-library.jpg" alt="The Midnight Library cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-midnight-library.html" class="book-title-link">The Midnight Library (reread)</a>
-                        <span class="book-author">by Matt Haig</span>
-                    </div>
-                    <div class="book-rating">★ 3.85</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/piranesi.html">
-                        <img src="images/piranesi.jpg" alt="Piranesi cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/piranesi.html" class="book-title-link">Piranesi</a>
-                        <span class="book-author">by Susanna Clarke</span>
-                    </div>
-                    <div class="book-rating">★ 4.40</div>
-                </article>
-            </div>
-        </div>
-
-        <!-- December 2025 -->
-        <div class="month-group">
-            <h3 class="month-title gold-accent">December 2025</h3>
-            <div class="book-list">
-                <article class="book-item">
-                    <a href="book-reviews/the-poppy-war.html">
-                        <img src="images/poppy-war.webp" alt="The Poppy War cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/the-poppy-war.html" class="book-title-link">The Poppy War (The Poppy War, #1)</a>
-                        <span class="book-author">by R.F. Kuang</span>
-                    </div>
-                    <div class="book-rating">★ 4.35</div>
-                </article>
-                <article class="book-item">
-                    <a href="book-reviews/babel.html">
-                        <img src="images/babel.jpg" alt="Babel cover" class="book-cover">
-                    </a>
-                    <div class="book-info">
-                        <a href="book-reviews/babel.html" class="book-title-link">Babel, or The Necessity of Violence</a>
-                        <span class="book-author">by R.F. Kuang</span>
-                    </div>
-                    <div class="book-rating">★ 4.33</div>
-                </article>
-            </div>
-        </div>
     </main>
 
-    <!-- Footer Placeholder -->
-    <div id="footer-placeholder"></div>
-
-   <div style="text-align: center; padding: 20px; font-family: Georgia, serif; font-size: 0.9rem; color: #666; border-top: 1px solid #eaeaea; margin-top: 40px;">
-        <p>&copy; 2026 Bluebound Ink. All rights reserved.</p>
-        <div style="margin-top: 10px;">
-            <a href="/privacy/privacy.html" style="color: #666; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
-            <a href="/privacy/terms.html" style="color: #666; text-decoration: none; margin: 0 10px;">Terms of Service</a> | 
-            <a href="/privacy/ai-usage.html" style="color: #666; text-decoration: none; margin: 0 10px;">AI Usage Policy</a>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Bluebound Ink</h3>
+                <p>A personal space for books, music, and creative explorations.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="books.html">Books</a></li>
+                    <li><a href="music.html">Music</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Stay Updated</h4>
+                <p>Get new posts and updates sent straight to your inbox.</p>
+                <form id="subscribe-form" class="subscribe-form">
+                    <input type="email" id="subscriber-email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p id="form-message" class="form-message"></p>
+            </div>
         </div>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bluebound Ink. All rights reserved.</p>
+            <div style="margin-top: 10px;">
+                <a href="/privacy/privacy.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">Privacy Policy</a> | 
+                <a href="/privacy/terms.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">Terms of Service</a> | 
+                <a href="/privacy/ai-usage.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">AI Usage Policy</a>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Script to Load footer.html Dynamically & Handle Themes -->
     <script>
         const themeToggleBtn = document.getElementById('themeToggleBtn');
 
@@ -295,11 +462,32 @@
             themeToggleBtn.textContent = '🌙';
         }
 
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            });
+        document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('subscriber-email').value;
+            const messageEl = document.getElementById('form-message');
+
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = "green";
+                    document.getElementById('subscriber-email').value = '';
+                } else {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = "red";
+                }
+            } catch (error) {
+                messageEl.textContent = "Something went wrong. Please try again later.";
+                messageEl.style.color = "red";
+            }
+        });
     </script>
 </body>
 </html>
