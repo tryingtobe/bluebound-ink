@@ -567,6 +567,7 @@ header nav a:hover {
     font-size: 1rem;
     opacity: 0.6;
 }
+<<<<<<< HEAD
 
 /* Page Layout & Privacy Policy Styling Matched to Bluebound Ink */
 html, body {
@@ -634,4 +635,71 @@ body.page-layout {
 
 .privacy-container li {
     margin-bottom: 10px;
+=======
+/* --- Mobile Responsive Adjustments --- */
+@media screen and (max-width: 768px) {
+    body {
+        margin: 20px auto;
+        padding: 0 20px;
+        font-size: 1.1rem; /* Slightly smaller base font for mobile readability */
+    }
+
+    /* Stack header branding and navigation vertically */
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 40px;
+        padding: 10px 0 25px 0;
+    }
+
+    .site-title {
+        font-size: 2.2rem;
+    }
+
+    header nav {
+        gap: 20px;
+        font-size: 1.3rem;
+        flex-wrap: wrap;
+    }
+
+    /* Stack review headers vertically (Cover image + Text info) */
+    .review-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .review-cover {
+        width: 120px;
+    }
+
+    .review-book-title {
+        font-size: 1.9rem;
+    }
+
+    /* Adjust book items for smaller viewports */
+    .book-item {
+        gap: 15px;
+    }
+
+    .book-title-link {
+        font-size: 1.25rem;
+    }
+
+    /* Stack footer columns and adjust padding */
+    .footer-container {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 30px;
+    }
+
+    .footer-bottom {
+        padding: 20px 20px 0 20px;
+    }
+
+    /* Stack newsletter subscribe form elements on very narrow screens */
+    .subscribe-form {
+        flex-direction: column;
+    }
+>>>>>>> ddcb180 (Add mobile-friendly responsive styles to stylesheet)
 }
