@@ -6,8 +6,14 @@
     <title>Responsible AI Usage - Bluebound Ink</title>
     <!-- Link your main stylesheet here -->
     <link rel="stylesheet" href="/styles.css"> 
+    
+    <!-- Add Option 1 right here inside the head -->
+    <style>
+        body { display: none !important; }
+    </style>
 </head>
 <body class="page-layout">
+    <!-- Rest of your code stays untouched -->
 
     <!-- Global Header -->
     <header>
