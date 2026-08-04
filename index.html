@@ -11,25 +11,43 @@
     
     <style>
         .site-footer {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-       :root {
-    --bg-color: #0f172a;
-    --bg-texture: none; /* Changed from radial-gradient */
-    --text-color: #ece3d0;
-    --text-opacity: 0.85;
-    --border-color: rgba(236, 227, 208, 0.15);
-    --gold-date: #d4af37;
-}
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        :root {
+            --bg-color: #0f172a;
+            --bg-texture: none;
+            --text-color: #ece3d0;
+            --text-opacity: 0.85;
+            --border-color: rgba(236, 227, 208, 0.15);
+            --gold-date: #d4af37;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --tag-bg: rgba(212, 175, 55, 0.1);
+            
+            /* Envelope Theme Colors (Dark Mode) */
+            --envelope-bg: #1e293b;
+            --envelope-border: #d4af37;
+            --envelope-text: #ece3d0;
+            --envelope-placeholder: rgba(236, 227, 208, 0.4);
+            --envelope-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
 
-body.light-mode {
-    --bg-color: #f7f4ec;
-    --bg-texture: none; /* Changed from radial-gradient */
-    --text-color: #2c2925;
-    --text-opacity: 0.9;
-    --border-color: rgba(44, 41, 37, 0.15);
-    --gold-date: #b8860b;
-}
+        body.light-mode {
+            --bg-color: #f7f4ec;
+            --bg-texture: none;
+            --text-color: #2c2925;
+            --text-opacity: 0.9;
+            --border-color: rgba(44, 41, 37, 0.15);
+            --gold-date: #b8860b;
+            --card-bg: rgba(0, 0, 0, 0.02);
+            --tag-bg: rgba(184, 134, 11, 0.1);
+
+            /* Envelope Theme Colors (Light Mode) */
+            --envelope-bg: #ebd5b3;
+            --envelope-border: #b8860b;
+            --envelope-text: #2c2925;
+            --envelope-placeholder: rgba(44, 41, 37, 0.5);
+            --envelope-shadow: 0 20px 50px rgba(44, 41, 37, 0.25);
+        }
 
         body {
             background-color: var(--bg-color);
@@ -39,8 +57,8 @@ body.light-mode {
             font-family: "Sabon MT W02", Georgia, serif;
             color: var(--text-color);
             max-width: 900px;
-            margin: 100px auto 0 auto;
-            padding: 0 50px;
+            margin: 80px auto 0 auto;
+            padding: 0 40px;
             line-height: 1.8;
             font-size: 1.25rem;
             font-weight: 500;
@@ -53,9 +71,9 @@ body.light-mode {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 90px;
+            margin-bottom: 70px;
             border-bottom: 1px solid var(--border-color);
-            padding: 20px 0 45px 0;
+            padding: 20px 0 40px 0;
         }
 
         .site-branding {
@@ -63,7 +81,7 @@ body.light-mode {
         }
 
         .site-title {
-            font-size: 2.9rem;
+            font-size: 2.6rem;
             font-weight: 500;
             letter-spacing: -0.5px;
             margin: 0;
@@ -76,9 +94,9 @@ body.light-mode {
         header nav {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 30px;
             font-family: "Cormorant Garamond", Georgia, serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
         }
 
         header nav a {
@@ -98,7 +116,7 @@ body.light-mode {
             border: none;
             color: var(--text-color);
             cursor: pointer;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             opacity: 0.8;
             padding: 0;
             display: flex;
@@ -130,7 +148,7 @@ body.light-mode {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .post-item {
@@ -160,7 +178,7 @@ body.light-mode {
         }
 
         .post-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-decoration: none;
             color: var(--text-color);
             font-weight: 400;
@@ -172,15 +190,275 @@ body.light-mode {
             color: #e6c567;
         }
 
-        /* Fixed Footer Styles (Contained cleanly within layout flow) */
+        /* -------------------------------------------------------------
+           OBVIOUS SIDE-PULL ENVELOPE / BOX POPUP
+        ------------------------------------------------------------- */
+        /* Highly visible Tab poking out from the right edge */
+        .mail-trigger-tab {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--envelope-bg);
+            color: var(--gold-date);
+            border: 2px solid var(--envelope-border);
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+            padding: 16px 14px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: -6px 4px 20px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+        }
+
+        .mail-trigger-tab:hover {
+            transform: translateY(-50%) translateX(-8px);
+            background-color: var(--envelope-border);
+            color: var(--bg-color);
+        }
+
+        .mail-trigger-tab span {
+            writing-mode: vertical-rl;
+            text-transform: uppercase;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        /* Envelope Seal Wax Badge on Tab */
+        .tab-stamp {
+            width: 22 height: 22px;
+            border-radius: 50%;
+            background: var(--gold-date);
+            color: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Focus Backdrop */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 1000;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Enclosed Envelope Box Center-Pulling Animation */
+        .mail-drawer {
+            position: fixed;
+            top: 50%;
+            right: -450px; /* Offscreen right */
+            transform: translateY(-50%) scale(0.9);
+            width: 90%;
+            max-width: 420px;
+            background-color: var(--envelope-bg);
+            color: var(--envelope-text);
+            border: 2px solid var(--envelope-border);
+            border-radius: 12px;
+            box-shadow: var(--envelope-shadow);
+            z-index: 1001;
+            opacity: 0;
+            transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, background-color 0.3s ease;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* Dynamic Class: Pulls out into center of screen */
+        .mail-drawer.open {
+            right: calc(50% - 210px); /* Center position */
+            transform: translateY(-50%) scale(1);
+            opacity: 1;
+        }
+
+        /* Top Envelope Flap Triangular Design */
+        .envelope-flap {
+            width: 100%;
+            height: 40px;
+            background-color: var(--envelope-bg);
+            border-bottom: 2px dashed var(--envelope-border);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .envelope-stamp {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            border: 1px dashed var(--envelope-border);
+            padding: 3px 6px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold-date);
+            transform: rotate(-5deg);
+        }
+
+        .drawer-content {
+            padding: 25px 25px 30px 25px;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .drawer-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--envelope-text);
+            opacity: 0.7;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        .drawer-close-btn:hover {
+            opacity: 1;
+            color: var(--gold-date);
+        }
+
+        .mail-drawer .posts-section-title {
+            color: var(--gold-date);
+            margin-bottom: 0;
+        }
+
+        /* Envelope Tags */
+        .mail-drawer .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 12px 0 16px 0;
+        }
+
+        .mail-drawer .tag-chip {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background-color: var(--tag-bg);
+            color: var(--envelope-text);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mail-drawer .tag-chip:hover, 
+        .mail-drawer .tag-chip.active {
+            border-color: var(--gold-date);
+            color: var(--gold-date);
+        }
+
+        .mail-drawer .tag-chip.active {
+            background-color: var(--gold-date);
+            color: var(--bg-color);
+        }
+
+        .mail-drawer .tag-chip.add-custom {
+            border-style: dashed;
+        }
+
+        /* Form Controls */
+        .mail-drawer .recommendation-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mail-drawer .recommendation-form input, 
+        .mail-drawer .recommendation-form textarea {
+            padding: 8px 0;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--envelope-text);
+            font-size: 1rem;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            transition: border-color 0.2s ease;
+            width: 100%;
+        }
+
+        .mail-drawer .recommendation-form input:focus, 
+        .mail-drawer .recommendation-form textarea:focus {
+            outline: none;
+            border-bottom-color: var(--gold-date);
+        }
+
+        .mail-drawer .recommendation-form input::placeholder, 
+        .mail-drawer .recommendation-form textarea::placeholder {
+            color: var(--envelope-placeholder);
+        }
+
+        .mail-drawer .custom-tag-input {
+            display: none;
+        }
+
+        .mail-drawer .custom-tag-input.visible {
+            display: block;
+        }
+
+        .mail-drawer .form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .mail-drawer .recommendation-form button[type="submit"] {
+            background: var(--gold-date);
+            border: none;
+            color: var(--bg-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 4px;
+            transition: opacity 0.2s ease;
+            width: 100%;
+        }
+
+        .mail-drawer .recommendation-form button[type="submit"]:hover {
+            opacity: 0.88;
+        }
+
+        /* Footer Styles */
         .site-footer {
             width: 100%;
             background-color: var(--bg-color);
-            background-image: var(--bg-texture);
-            background-size: var(--bg-size);
             color: var(--text-color);
-            padding: 70px 0 40px 0;
-            margin-top: 100px;
+            padding: 60px 0 40px 0;
+            margin-top: 80px;
             border-top: 1px solid var(--border-color);
             font-family: "Cormorant Garamond", Georgia, serif;
         }
@@ -188,7 +466,6 @@ body.light-mode {
         .footer-container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 0;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -201,28 +478,28 @@ body.light-mode {
         }
 
         .footer-col h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 500;
             font-style: italic;
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
             color: var(--text-color);
         }
 
         .footer-col h4 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
             color: var(--gold-date);
         }
 
         .footer-col p {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             line-height: 1.6;
             opacity: 0.75;
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
         }
 
         .footer-col ul {
@@ -232,13 +509,13 @@ body.light-mode {
         }
 
         .footer-col ul li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .footer-col ul li a {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             opacity: 0.75;
             transition: opacity 0.2s ease, color 0.2s ease;
         }
@@ -251,17 +528,17 @@ body.light-mode {
         .subscribe-form {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .subscribe-form input[type="email"] {
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 4px;
             border: 1px solid var(--border-color);
             background-color: transparent;
             color: var(--text-color);
             flex: 1;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-family: "Cormorant Garamond", Georgia, serif;
         }
 
@@ -271,7 +548,7 @@ body.light-mode {
         }
 
         .subscribe-form button {
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 4px;
             border: 1px solid var(--border-color);
             background-color: var(--gold-date);
@@ -279,7 +556,7 @@ body.light-mode {
             font-weight: 600;
             cursor: pointer;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: opacity 0.2s ease;
@@ -291,16 +568,16 @@ body.light-mode {
 
         .form-message {
             margin-top: 10px;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .footer-bottom {
             max-width: 900px;
-            margin: 50px auto 0 auto;
-            padding-top: 25px;
+            margin: 40px auto 0 auto;
+            padding-top: 20px;
             border-top: 1px solid var(--border-color);
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.95rem;
             opacity: 0.6;
         }
     </style>
@@ -339,6 +616,46 @@ body.light-mode {
         </div>
     </main>
 
+    <!-- Side Trigger Tab -->
+    <button class="mail-trigger-tab" id="openDrawerBtn" aria-label="Recommend a Book">
+        <div class="tab-stamp">✦</div>
+        <span>Mail Note</span>
+    </button>
+
+    <!-- Dimmed Focus Overlay -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Center-Pull Envelope Box -->
+    <aside class="mail-drawer" id="mailDrawer">
+        <div class="envelope-flap">
+            <div class="envelope-stamp">AIR MAIL</div>
+        </div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2 class="posts-section-title">Leave a Book Suggestion</h2>
+                <button class="drawer-close-btn" id="closeDrawerBtn" aria-label="Close panel">&times;</button>
+            </div>
+
+            <div class="tag-container" id="tagContainer">
+                <button type="button" class="tag-chip active" data-tag="general">#general</button>
+                <button type="button" class="tag-chip" data-tag="dark-academia">#dark-academia</button>
+                <button type="button" class="tag-chip" data-tag="poetry">#poetry</button>
+                <button type="button" class="tag-chip add-custom" id="addCustomTagBtn">+ custom</button>
+            </div>
+
+            <form id="recommendation-form" class="recommendation-form">
+                <input type="text" id="custom-tag-input" class="custom-tag-input" placeholder="Custom tag name...">
+                <input type="text" id="rec-book-info" placeholder="Title & Author *" required>
+                <textarea id="rec-comment" rows="2" placeholder="Why read it? (optional)"></textarea>
+                
+                <div class="form-actions">
+                    <button type="submit">Drop Note ✦</button>
+                    <p id="rec-form-message" class="form-message" style="margin: 0; font-size: 0.8rem; text-align: center; width: 100%;"></p>
+                </div>
+            </form>
+        </div>
+    </aside>
+
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-col">
@@ -364,15 +681,13 @@ body.light-mode {
                 <p id="form-message" class="form-message"></p>
             </div>
         </div>
-         <div class="footer-bottom">
+        <div class="footer-bottom">
             <p>&copy; 2026 Bluebound Ink. All rights reserved.</p>
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 15px;">
                 <a href="/privacy/privacy.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">Privacy Policy</a> | 
                 <a href="/privacy/terms.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">Terms of Service</a> 
-                 <!-- 
-                <a href="/ai-usage.html">Responsible AI Usage</a> 
-                -->
             </div>
+        </div>
     </footer>
 
     <script>
@@ -398,30 +713,107 @@ body.light-mode {
             themeToggleBtn.textContent = '🌙';
         }
 
-        document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+        // Side Pull to Center Modal Interactions
+        const mailDrawer = document.getElementById('mailDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const openDrawerBtn = document.getElementById('openDrawerBtn');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+
+        function openDrawer() {
+            mailDrawer.classList.add('open');
+            drawerOverlay.classList.add('active');
+        }
+
+        function closeDrawer() {
+            mailDrawer.classList.remove('open');
+            drawerOverlay.classList.remove('active');
+        }
+
+        openDrawerBtn.addEventListener('click', openDrawer);
+        closeDrawerBtn.addEventListener('click', closeDrawer);
+        drawerOverlay.addEventListener('click', closeDrawer);
+
+        // Tag Handling
+        let activeTag = 'general';
+        const tagContainer = document.getElementById('tagContainer');
+        const customTagInput = document.getElementById('custom-tag-input');
+        const addCustomTagBtn = document.getElementById('addCustomTagBtn');
+
+        tagContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tag-chip') && !e.target.classList.contains('add-custom')) {
+                document.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('active'));
+                e.target.classList.add('active');
+                activeTag = e.target.getAttribute('data-tag');
+                customTagInput.classList.remove('visible');
+            }
+        });
+
+        addCustomTagBtn.addEventListener('click', () => {
+            document.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('active'));
+            addCustomTagBtn.classList.add('active');
+            customTagInput.classList.add('visible');
+            customTagInput.focus();
+            activeTag = 'custom';
+        });
+
+        function addNewTagChip(tagName) {
+            const cleanTag = tagName.toLowerCase().replace(/[^a-z0-9-]/g, '');
+            if (!cleanTag) return 'general';
+            
+            let existingChip = document.querySelector(`[data-tag="${cleanTag}"]`);
+            if (!existingChip) {
+                const newBtn = document.createElement('button');
+                newBtn.type = 'button';
+                newBtn.className = 'tag-chip active';
+                newBtn.setAttribute('data-tag', cleanTag);
+                newBtn.textContent = `#${cleanTag}`;
+                tagContainer.insertBefore(newBtn, addCustomTagBtn);
+            } else {
+                existingChip.classList.add('active');
+            }
+            return cleanTag;
+        }
+
+        // Submit Handler
+        document.getElementById('recommendation-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('subscriber-email').value;
-            const messageEl = document.getElementById('form-message');
+            const messageEl = document.getElementById('rec-form-message');
+            
+            let finalTag = activeTag;
+            if (activeTag === 'custom') {
+                finalTag = addNewTagChip(customTagInput.value);
+            }
+
+            const payload = {
+                bookInfo: document.getElementById('rec-book-info').value,
+                comment: document.getElementById('rec-comment').value,
+                tag: finalTag
+            };
 
             try {
-                const response = await fetch('/api/subscribe', {
+                const res = await fetch('/api/recommendations', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
+                    body: JSON.stringify(payload)
                 });
-                const data = await response.json();
-                
-                if (data.success) {
-                    messageEl.textContent = data.message;
-                    messageEl.style.color = "green";
-                    document.getElementById('subscriber-email').value = '';
+
+                if (res.ok) {
+                    messageEl.textContent = "Sent!";
+                    messageEl.style.color = "var(--gold-date)";
+                    document.getElementById('recommendation-form').reset();
+                    customTagInput.classList.remove('visible');
+                    setTimeout(() => {
+                        closeDrawer();
+                        messageEl.textContent = "";
+                    }, 1500);
                 } else {
-                    messageEl.textContent = data.message;
-                    messageEl.style.color = "red";
+                    const data = await res.json();
+                    messageEl.textContent = data.error || "Error submitting.";
+                    messageEl.style.color = "#d32f2f";
                 }
-            } catch (error) {
-                messageEl.textContent = "Something went wrong. Please try again later.";
-                messageEl.style.color = "red";
+            } catch (err) {
+                messageEl.textContent = "Error submitting.";
+                messageEl.style.color = "#d32f2f";
             }
         });
     </script>
