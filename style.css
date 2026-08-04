@@ -640,4 +640,7 @@ body.page-layout {
 .privacy-container li {
     margin-bottom: 10px;
 }
-
+/* style.css */
+.logo-filter {
+  filter: invert(93%) sepia(21%) saturate(583%) hue-rotate(341deg) brightness(101%) contrast(92%);
+}
