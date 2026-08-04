@@ -1,10 +1,16 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
+
+const app = express();
+
+app.use(express.json());
+
 const cors = require('cors');
 const axios = require('axios');
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 require('dotenv').config();
-const nodemailer = require('nodemailer');
+
 const { Resend } = require('resend');
 
 // Initialize Firebase Admin using the service account key file
@@ -19,8 +25,8 @@ const db = getFirestore();
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: 'bluebound.ink@gmail.com',
+        pass: Moonandstars2019!
     }
 });
 
@@ -95,38 +101,28 @@ app.get('/api/now-playing', async (req, res) => {
     }
 });
 
-// Subscription endpoint (Saves to Firestore & sends welcome email via Nodemailer)
-app.post('/api/subscribe', async (req, res) => {
-    try {
-        const { email } = req.body;
+app.post('/api/recommendations', async (req, res) => {
+  const { bookInfo, comment, tag } = req.body;
 
-        if (!email) {
-            return res.status(400).json({ success: false, message: "Email is required." });
-        }
+  if (!bookInfo) {
+    return res.status(400).json({ error: 'Title & Author are required.' });
+  }
 
-        const subscriberRef = db.collection('subscribers').doc(email);
+  const mailOptions = {
+    from: '"Bluebound Ink Reader" <bluebound.ink@gmail.com>',
+    to: 'bluebound.ink@gmail.com',
+    subject: `New Book Recommendation [${tag}]`,
+    text: `You received a new recommendation!\n\nTag: #${tag}\nBook: ${bookInfo}\nNotes: ${comment || 'N/A'}`
+  };
 
-        await subscriberRef.set({
-            email: email,
-            subscribedAt: new Date().toISOString()
-        });
-
-        const mailOptions = {
-            from: {
-                name: 'Bluebound Ink',
-                address: process.env.EMAIL_USER
-            },
-            to: email,
-            subject: 'Welcome to Bluebound Ink',
-            text: 'Thank you for subscribing to Bluebound Ink.',
-            html: `
-                <div style="font-family: Georgia, serif; color: #2c2925; padding: 20px;">
-                    <h2 style="font-style: italic;">Welcome to Bluebound Ink</h2>
-                    <p>Thank you for subscribing. You are now on the list to receive occasional notes.</p>
-                    <p style="color: #888; font-size: 0.9rem; margin-top: 30px;">Bluebound Ink</p>
-                </div>
-            `
-        };
+  try {
+    await transporter.sendMail(mailOptions);
+    return res.status(200).json({ success: true, message: 'Recommendation sent!' });
+  } catch (error) {
+    console.error('Email error:', error);
+    return res.status(500).json({ error: 'Failed to send email.' });
+  }
+});
 
         await transporter.sendMail(mailOptions);
         console.log(`Confirmation email sent and subscriber saved: ${email}`);

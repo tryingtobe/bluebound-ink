@@ -14,26 +14,22 @@
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
         :root {
-            --bg-color: #0f172a;
-            --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
-            --bg-size: 32px 32px;
-            
-            --text-color: #ece3d0;
-            --text-opacity: 0.85;
-            --border-color: rgba(236, 227, 208, 0.15);
-            --gold-date: #d4af37;
-        }
+    --bg-color: #0f172a;
+    --bg-texture: none; /* Changed from radial-gradient */
+    --text-color: #ece3d0;
+    --text-opacity: 0.85;
+    --border-color: rgba(236, 227, 208, 0.15);
+    --gold-date: #d4af37;
+}
 
-        body.light-mode {
-            --bg-color: #f7f4ec;
-            --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
-            --bg-size: 32px 32px;
-
-            --text-color: #2c2925;
-            --text-opacity: 0.9;
-            --border-color: rgba(44, 41, 37, 0.15);
-            --gold-date: #b8860b;
-        }
+body.light-mode {
+    --bg-color: #f7f4ec;
+    --bg-texture: none; /* Changed from radial-gradient */
+    --text-color: #2c2925;
+    --text-opacity: 0.9;
+    --border-color: rgba(44, 41, 37, 0.15);
+    --gold-date: #b8860b;
+}
 
         body {
             background-color: var(--bg-color);
@@ -416,11 +412,13 @@
         <!-- December 2025 Playlists -->
         <div class="monthly-entry">
             <h3 class="playlist-month-heading">December 2025</h3>
+            <!-- First: Colonial Ink in Forgotten Memories -->
             <div class="playlist-container">
-                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2TwmgJ3o3dwSLUXWEmy9WU?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-            <div class="playlist-container" style="margin-top: 20px;">
                 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5xlm3oJxYwVHPAFtyDbdb9?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <!-- Second: Waking the Phoenix -->
+            <div class="playlist-container" style="margin-top: 20px;">
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2TwmgJ3o3dwSLUXWEmy9WU?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </div>
     </main>
@@ -455,7 +453,9 @@
             <div style="margin-top: 10px;">
                 <a href="/privacy/privacy.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">Privacy Policy</a> | 
                 <a href="/privacy/terms.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">Terms of Service</a> | 
-                <a href="/privacy/ai-usage.html" style="color: inherit; text-decoration: none; margin: 0 10px; opacity: 0.8;">AI Usage Policy</a>
+                 <!-- 
+                <a href="/ai-usage.html">Responsible AI Usage</a> 
+                -->
             </div>
         </div>
     </footer>

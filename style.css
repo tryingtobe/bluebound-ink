@@ -1,6 +1,6 @@
 :root {
     --bg-color: #0f172a;
-    --bg-texture: radial-gradient(#1e293b 1px, transparent 1px);
+    --bg-texture: none;
     --bg-size: 32px 32px;
     --text-color: #ece3d0;
     --text-opacity: 0.85;
@@ -10,7 +10,7 @@
 
 body.light-mode {
     --bg-color: #f7f4ec;
-    --bg-texture: radial-gradient(#d1c7b7 1px, transparent 1px);
+    --bg-texture: none;
     --bg-size: 32px 32px;
     --text-color: #2c2925;
     --text-opacity: 0.9;
@@ -19,9 +19,8 @@ body.light-mode {
 }
 
 body {
-    background-color: var(--bg-color);
-    background-image: var(--bg-texture);
-    background-size: var(--bg-size);
+background-color: var(--bg-color);
+    background-image: none !important; /* Forces all pages to drop the dot texture */
     font-family: "Sabon MT W02", Georgia, serif;
     color: var(--text-color);
     max-width: 900px;
@@ -33,6 +32,11 @@ body {
     letter-spacing: 0.02em;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Also strip it from the footer */
+.site-footer {
+    background-image: none !important;
 }
 
 /* Header Layout */
@@ -285,6 +289,7 @@ header nav a:hover {
     border-bottom: 1px solid var(--border-color);
 }
 
+
 .review-cover {
     width: 160px;
     object-fit: contain; 
@@ -323,13 +328,13 @@ header nav a:hover {
 }
 
 .featured-quote {
-    margin: 50px 0;
-    padding: 30px 40px;
-    border-left: 2px solid var(--gold-date);
-    background: rgba(212, 175, 55, 0.03);
+    margin: 40px 0;
+    padding-left: 25px;
+    border-left: 3px solid var(--gold-date);
+    background-color: transparent; /* Blends 100% with page background */
     font-style: italic;
-    font-size: 1.6rem;
-    line-height: 1.6;
+    font-size: 1.35rem;
+    opacity: 0.95;
 }
 
 .review-body p {
@@ -635,6 +640,7 @@ body.page-layout {
 
 .privacy-container li {
     margin-bottom: 10px;
+<<<<<<< HEAD
 =======
 /* --- Mobile Responsive Adjustments --- */
 @media screen and (max-width: 768px) {
@@ -703,3 +709,7 @@ body.page-layout {
     }
 >>>>>>> ddcb180 (Add mobile-friendly responsive styles to stylesheet)
 }
+=======
+}
+
+>>>>>>> 7606764 (Renamed blog to index and updated DNS/email configuration references)
