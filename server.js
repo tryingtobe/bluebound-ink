@@ -9,9 +9,15 @@ const cors = require('cors');
 const axios = require('axios');
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
+<<<<<<< HEAD
+//require('dotenv').config(); // MUST be line 1
+//const { Resend } = require('resend');
+//const resend = new Resend(process.env.RESEND_API_KEY);
+=======
 require('dotenv').config();
 
 const { Resend } = require('resend');
+>>>>>>> e7d52f0 (Add Nodemailer email routing for book recommendations)
 
 // Initialize Firebase Admin using the service account key file
 const serviceAccount = require('./serviceAccountKey.json');
@@ -22,6 +28,15 @@ initializeApp({
 const db = getFirestore();
 
 // Configure Nodemailer transporter using Gmail SMTP
+<<<<<<< HEAD
+//const transporter = nodemailer.createTransport({
+ //   service: 'gmail',
+  //  auth: {
+    //    user: process.env.EMAIL_USER,
+      //  pass: process.env.EMAIL_PASS
+    //}
+//});
+=======
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -29,16 +44,17 @@ const transporter = nodemailer.createTransport({
         pass: Moonandstars2019!
     }
 });
+>>>>>>> e7d52f0 (Add Nodemailer email routing for book recommendations)
 
 // Initialize Resend with your API key from .env
-const resend = new Resend(process.env.RESEND_API_KEY);
+//const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// Routes for static HTML files
+// Routes for static HTML files/
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/books.html');
 });
