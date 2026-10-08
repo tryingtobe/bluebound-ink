@@ -1,0 +1,12 @@
+# Files that are never uploaded to Google Cloud (Cloud Run).
+# Secrets live in Google Secret Manager instead.
+.gcloudignore
+.git
+.gitignore
+.env
+serviceAccountKey.json
+*.save
+node_modules/
+
+# The website itself is on GitHub Pages, so the server does not need it
+images/

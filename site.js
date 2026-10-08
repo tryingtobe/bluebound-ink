@@ -6,6 +6,12 @@
 //   <footer id="site-footer" class="site-footer"></footer>
 //   <script src="/site.js"></script>     (at the end of <body>)
 
+// Where the API server (server.js) runs.
+// On bluebound-ink.com it is the Cloud Run service; on your computer it is the local server.
+window.API_BASE = window.location.hostname.endsWith('bluebound-ink.com')
+    ? 'https://bluebound-api-311249662921.europe-west3.run.app'
+    : '';
+
 (function () {
     const NAV_LINKS = [
         { href: '/books.html', label: 'Books', section: 'books' },
@@ -112,7 +118,7 @@
             const messageEl = document.getElementById('form-message');
 
             try {
-                const response = await fetch('/api/subscribe', {
+                const response = await fetch(window.API_BASE + '/api/subscribe', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: emailInput.value })

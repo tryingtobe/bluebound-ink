@@ -4,15 +4,21 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 
-// Initialize Firebase Admin using the service account key file
-const serviceAccount = require('./serviceAccountKey.json');
+// Cloud Run sets K_SERVICE. There the server logs in to Firebase with its own
+// Google account, so no key file is needed. On your computer it uses serviceAccountKey.json.
+const isCloudRun = Boolean(process.env.K_SERVICE);
+const keyFile = path.join(__dirname, 'serviceAccountKey.json');
 
-initializeApp({
-    credential: cert(serviceAccount)
-});
+if (!isCloudRun && fs.existsSync(keyFile)) {
+    initializeApp({ credential: cert(require(keyFile)) });
+} else {
+    initializeApp();
+}
 const db = getFirestore();
 
 // Configure Nodemailer transporter using Gmail SMTP.
@@ -25,19 +31,21 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// Only these websites may call the API from a browser.
+// Set ALLOWED_ORIGIN in .env or on Cloud Run (comma-separated) to change it.
+const allowedOrigins = (process.env.ALLOWED_ORIGIN || 'https://bluebound-ink.com,https://www.bluebound-ink.com')
+    .split(',')
+    .map(origin => origin.trim());
+
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static(__dirname));
+app.use(cors({ origin: allowedOrigins }));
+app.use(express.json({ limit: '10kb' }));
 
-// Routes for static HTML files/
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/books.html');
-});
-
-app.get('/music.html', (req, res) => {
-    res.sendFile(__dirname + '/music.html');
-});
+// On your computer the server also shows the website, so you can test everything at
+// http://127.0.0.1:3000. On Cloud Run it is only the API (the website is on GitHub Pages).
+if (!isCloudRun) {
+    app.use(express.static(__dirname));
+}
 
 // Spotify Credentials & Endpoints from .env
 const client_id = process.env.SPOTIFY_CLIENT_ID;
@@ -100,6 +108,10 @@ app.post('/api/recommendations', async (req, res) => {
     return res.status(400).json({ error: 'Title & Author are required.' });
   }
 
+  if (String(bookInfo).length > 200 || String(comment || '').length > 2000 || String(tag || '').length > 50) {
+    return res.status(400).json({ error: 'Your note is too long.' });
+  }
+
   const mailOptions = {
     from: '"Bluebound Ink Reader" <bluebound.ink@gmail.com>',
     to: 'bluebound.ink@gmail.com',
@@ -122,6 +134,11 @@ app.post('/api/subscribe', async (req, res) => {
 
         if (!email) {
             return res.status(400).json({ success: false, message: "Email is required." });
+        }
+
+        // Simple check so the server does not send mail to nonsense addresses
+        if (typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({ success: false, message: "Please enter a valid email address." });
         }
 
         const subscriberRef = db.collection('subscribers').doc(email);
