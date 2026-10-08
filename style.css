@@ -675,6 +675,69 @@ header nav a.active {
     color: #e6c567;
 }
 
+/* Anything with the hidden attribute stays hidden, even if a rule above sets display */
+[hidden] {
+    display: none !important;
+}
+
+/* Genre hashtags (review pages, Books filter, home page) */
+.review-tags,
+.genre-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.review-tags {
+    margin-top: 18px;
+}
+
+.genre-tag {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: var(--gold-date);
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 4px 12px;
+    background: none;
+    cursor: pointer;
+    line-height: 1.6;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.genre-tag:hover,
+.genre-tag:focus-visible {
+    border-color: var(--gold-date);
+}
+
+.genre-tag.active {
+    background-color: var(--gold-date);
+    border-color: var(--gold-date);
+    color: var(--bg-color);
+}
+
+.genre-filter {
+    margin: -10px 0 40px 0;
+}
+
+.genre-filter-status {
+    font-size: 1rem;
+    opacity: 0.75;
+    margin: -25px 0 35px 0;
+}
+
+.genre-filter-status button {
+    background: none;
+    border: none;
+    color: var(--gold-date);
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-decoration: underline;
+}
+
 /* --- Mobile Responsive Adjustments --- */
 @media screen and (max-width: 768px) {
     body {

@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books | Bluebound Ink</title>
+    <!-- Link preview (Telegram, WhatsApp, Instagram, X, ...) -->
+    <meta name="description" content="Every book I read, with ratings and reviews. Filter by genre.">
+    <meta property="og:site_name" content="Bluebound Ink">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Reading Log | Bluebound Ink">
+    <meta property="og:description" content="Every book I read, with ratings and reviews. Filter by genre.">
+    <meta property="og:url" content="https://bluebound-ink.com/books.html">
+    <meta property="og:image" content="https://bluebound-ink.com/images/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Importing Cormorant Garamond from Google Fonts -->
      <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,13 +115,21 @@
     <main>
         <h2 class="page-section-title gold-accent">Reading Log</h2>
 
+        <!--
+            Genres: each book below has data-genres="..." (separate genres with spaces).
+            Use the same hashtags as under the book's review page.
+            The filter buttons are made from these automatically.
+        -->
+        <div class="genre-filter" id="genre-filter" aria-label="Filter by genre"></div>
+        <p class="genre-filter-status" id="genre-filter-status" role="status" hidden></p>
+
         <!-- June 2026 -->
         <div class="month-group">
             <h3 class="month-title gold-accent">June 2026</h3>
             <div class="book-list">
-                <article class="book-item">
+                <article class="book-item" data-genres="classics romance">
                     <a href="book-reviews/persuasion.html">
-                        <img src="images/persuasion.webp" alt="Persuasion cover" class="book-cover">
+                        <img src="images/covers/persuasion.webp" loading="lazy" decoding="async" alt="Persuasion cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/persuasion.html" class="book-title-link">Persuasion</a>
@@ -119,9 +137,9 @@
                     </div>
                     <div class="book-rating">★ 4.56</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy dark-academia">
                     <a href="book-reviews/katabasis.html">
-                        <img src="images/katabasis.webp" alt="Katabasis cover" class="book-cover">
+                        <img src="images/covers/katabasis.webp" loading="lazy" decoding="async" alt="Katabasis cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/katabasis.html" class="book-title-link">Katabasis</a>
@@ -129,9 +147,9 @@
                     </div>
                     <div class="book-rating">★ 4.23</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="historical-fiction">
                     <a href="book-reviews/the-lion-women-of-tehran.html">
-                        <img src="images/the-lion-women-of-tehran.jpg" alt="The Lion Women of Tehran cover" class="book-cover">
+                        <img src="images/covers/the-lion-women-of-tehran.webp" loading="lazy" decoding="async" alt="The Lion Women of Tehran cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-lion-women-of-tehran.html" class="book-title-link">The Lion Women of Tehran</a>
@@ -146,9 +164,9 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">May 2026</h3>
             <div class="book-list">
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy epic-fantasy">
                     <a href="book-reviews/the-fire-of-vengeance.html">
-                        <img src="images/the-fire-of-vengeance.webp" alt="The Fire of Vengeance cover" class="book-cover">
+                        <img src="images/covers/the-fire-of-vengeance.webp" loading="lazy" decoding="async" alt="The Fire of Vengeance cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-fire-of-vengeance.html" class="book-title-link">The Fire of Vengeance (The Burning, #2)</a>
@@ -163,9 +181,9 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">April 2026</h3>
             <div class="book-list">
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy dark-fantasy romance">
                     <a href="book-reviews/alchemised.html">
-                        <img src="images/alchemised.jpg" alt="Alchemised cover" class="book-cover">
+                        <img src="images/covers/alchemised.webp" loading="lazy" decoding="async" alt="Alchemised cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/alchemised.html" class="book-title-link">Alchemised</a>
@@ -180,9 +198,9 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">March 2026</h3>
             <div class="book-list">
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy epic-fantasy">
                     <a href="book-reviews/the-rage-of-dragons.html">
-                        <img src="images/the-rage-of-dragons.webp" alt="The Rage of Dragons cover" class="book-cover">
+                        <img src="images/covers/the-rage-of-dragons.webp" loading="lazy" decoding="async" alt="The Rage of Dragons cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-rage-of-dragons.html" class="book-title-link">The Rage of Dragons (The Burning, #1)</a>
@@ -190,9 +208,9 @@
                     </div>
                     <div class="book-rating">★ 4.37</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy romantasy">
                     <a href="book-reviews/the-jasad-heir.html">
-                        <img src="images/the-jasad-heir.webp" alt="The Jasad Heir cover" class="book-cover">
+                        <img src="images/covers/the-jasad-heir.webp" loading="lazy" decoding="async" alt="The Jasad Heir cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-jasad-heir.html" class="book-title-link">The Jasad Heir (The Scorched Throne, #1)</a>
@@ -200,9 +218,9 @@
                     </div>
                     <div class="book-rating">★ 4.52</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy romantasy">
                     <a href="book-reviews/the-jasad-crown.html">
-                        <img src="images/the-jasad-crown.webp" alt="The Jasad Crown cover" class="book-cover">
+                        <img src="images/covers/the-jasad-crown.webp" loading="lazy" decoding="async" alt="The Jasad Crown cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-jasad-crown.html" class="book-title-link">The Jasad Crown (The Scorched Throne, #2)</a>
@@ -210,9 +228,9 @@
                     </div>
                     <div class="book-rating">★ 4.64</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy dark-fantasy">
                     <a href="book-reviews/the-poet-empress.html">
-                        <img src="images/the-poet-empress.png" alt="The Poet Empress cover" class="book-cover">
+                        <img src="images/covers/the-poet-empress.webp" loading="lazy" decoding="async" alt="The Poet Empress cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-poet-empress.html" class="book-title-link">The Poet Empress</a>
@@ -227,9 +245,9 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">February 2026</h3>
             <div class="book-list">
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy grimdark">
                     <a href="book-reviews/the-burning-god.html">
-                        <img src="images/the-burning-god.webp" alt="The Burning God cover" class="book-cover">
+                        <img src="images/covers/the-burning-god.webp" loading="lazy" decoding="async" alt="The Burning God cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-burning-god.html" class="book-title-link">The Burning God (The Poppy War, #3)</a>
@@ -237,9 +255,9 @@
                     </div>
                     <div class="book-rating">★ 4.47</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy">
                     <a href="book-reviews/the-sword-of-kaigen.html">
-                        <img src="images/the-sword-of-kaigen.webp" alt="The Sword of Kaigen cover" class="book-cover">
+                        <img src="images/covers/the-sword-of-kaigen.webp" loading="lazy" decoding="async" alt="The Sword of Kaigen cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-sword-of-kaigen.html" class="book-title-link">The Sword of Kaigen: A Theonite War Story</a>
@@ -247,9 +265,9 @@
                     </div>
                     <div class="book-rating">★ 4.25</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="romance contemporary">
                     <a href="book-reviews/before-i-let-go.html">
-                        <img src="images/Before-I-Let-Go.jpg" alt="Before I Let Go cover" class="book-cover">
+                        <img src="images/covers/before-i-let-go.webp" loading="lazy" decoding="async" alt="Before I Let Go cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/before-i-let-go.html" class="book-title-link">Before I Let Go</a>
@@ -257,9 +275,9 @@
                     </div>
                     <div class="book-rating">★ 5.00</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="historical-fiction">
                     <a href="book-reviews/the-mademoiselle-alliance.html">
-                        <img src="images/The+Mademoiselle+Alliance.webp" alt="The Mademoiselle Alliance cover" class="book-cover">
+                        <img src="images/covers/the-mademoiselle-alliance.webp" loading="lazy" decoding="async" alt="The Mademoiselle Alliance cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-mademoiselle-alliance.html" class="book-title-link">The Mademoiselle Alliance</a>
@@ -274,9 +292,9 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">January 2026</h3>
             <div class="book-list">
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy grimdark">
                     <a href="book-reviews/the-dragon-republic.html">
-                        <img src="images/the-dragon-republic.webp" alt="The Dragon Republic cover" class="book-cover">
+                        <img src="images/covers/the-dragon-republic.webp" loading="lazy" decoding="async" alt="The Dragon Republic cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-dragon-republic.html" class="book-title-link">The Dragon Republic (The Poppy War, #2)</a>
@@ -284,9 +302,9 @@
                     </div>
                     <div class="book-rating">★ 4.63</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="contemporary literary-fiction">
                     <a href="book-reviews/the-midnight-library.html">
-                        <img src="images/midnight-library.jpg" alt="The Midnight Library cover" class="book-cover">
+                        <img src="images/covers/the-midnight-library.webp" loading="lazy" decoding="async" alt="The Midnight Library cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-midnight-library.html" class="book-title-link">The Midnight Library (reread)</a>
@@ -294,9 +312,9 @@
                     </div>
                     <div class="book-rating">★ 3.85</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy literary-fiction">
                     <a href="book-reviews/piranesi.html">
-                        <img src="images/piranesi.jpg" alt="Piranesi cover" class="book-cover">
+                        <img src="images/covers/piranesi.webp" loading="lazy" decoding="async" alt="Piranesi cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/piranesi.html" class="book-title-link">Piranesi</a>
@@ -311,9 +329,9 @@
         <div class="month-group">
             <h3 class="month-title gold-accent">December 2025</h3>
             <div class="book-list">
-                <article class="book-item fix-cover">
+                <article class="book-item fix-cover" data-genres="fantasy grimdark">
                     <a href="book-reviews/the-poppy-war.html">
-                        <img src="images/poppy-war.webp" alt="The Poppy War cover" class="book-cover">
+                        <img src="images/covers/the-poppy-war.webp" loading="lazy" decoding="async" alt="The Poppy War cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/the-poppy-war.html" class="book-title-link">The Poppy War (The Poppy War, #1)</a>
@@ -321,9 +339,9 @@
                     </div>
                     <div class="book-rating">★ 4.35</div>
                 </article>
-                <article class="book-item">
+                <article class="book-item" data-genres="fantasy dark-academia historical-fiction">
                     <a href="book-reviews/babel.html">
-                        <img src="images/babel.jpg" alt="Babel cover" class="book-cover">
+                        <img src="images/covers/babel.webp" loading="lazy" decoding="async" alt="Babel cover" class="book-cover">
                     </a>
                     <div class="book-info">
                         <a href="book-reviews/babel.html" class="book-title-link">Babel, or The Necessity of Violence</a>
@@ -337,5 +355,71 @@
 
     <footer id="site-footer" class="site-footer"></footer>
     <script src="/site.js"></script>
+
+    <script>
+        // Genre filter: the buttons are built from data-genres on each book.
+        // The chosen genre is kept in the address (books.html?genre=fantasy),
+        // so the hashtags on review pages link straight to a filtered list.
+        const books = Array.from(document.querySelectorAll('.book-item[data-genres]'));
+        const filterBox = document.getElementById('genre-filter');
+        const statusBox = document.getElementById('genre-filter-status');
+
+        const counts = {};
+        books.forEach(book => {
+            book.dataset.genres.split(' ').filter(Boolean).forEach(genre => {
+                counts[genre] = (counts[genre] || 0) + 1;
+            });
+        });
+        const genres = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+
+        function makeButton(label, genre) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'genre-tag';
+            button.textContent = label;
+            button.dataset.genre = genre;
+            button.addEventListener('click', () => applyFilter(genre));
+            filterBox.appendChild(button);
+        }
+
+        makeButton('All', '');
+        genres.forEach(genre => makeButton('#' + genre, genre));
+
+        function applyFilter(genre) {
+            if (genre && !counts[genre]) genre = '';
+
+            books.forEach(book => {
+                book.hidden = genre !== '' && !book.dataset.genres.split(' ').includes(genre);
+            });
+            document.querySelectorAll('.month-group').forEach(group => {
+                group.hidden = !group.querySelector('.book-item:not([hidden])');
+            });
+            filterBox.querySelectorAll('.genre-tag').forEach(button => {
+                const isActive = button.dataset.genre === genre;
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-pressed', isActive);
+            });
+
+            if (genre) {
+                const n = counts[genre];
+                statusBox.textContent = 'Showing ' + n + (n === 1 ? ' book' : ' books') + ' tagged #' + genre + '. ';
+                const showAll = document.createElement('button');
+                showAll.type = 'button';
+                showAll.textContent = 'Show all';
+                showAll.addEventListener('click', () => applyFilter(''));
+                statusBox.appendChild(showAll);
+                statusBox.hidden = false;
+            } else {
+                statusBox.hidden = true;
+            }
+
+            const url = new URL(window.location);
+            if (genre) url.searchParams.set('genre', genre);
+            else url.searchParams.delete('genre');
+            history.replaceState(null, '', url);
+        }
+
+        applyFilter(new URLSearchParams(window.location.search).get('genre') || '');
+    </script>
 </body>
 </html>
