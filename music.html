@@ -177,16 +177,15 @@
     <script>
         async function fetchNowPlaying() {
             try {
-                const response = await fetch('/api/now-playing');
+                const response = await fetch(window.API_BASE + '/api/now-playing');
                 const data = await response.json();
 
-                if (data && data.item) {
-                    document.getElementById('track-name').textContent = data.item.name;
-                    document.getElementById('artist-name').textContent = data.item.artists.map(artist => artist.name).join(', ');
-                    
-                    const albumArtUrl = data.item.album.images[0]?.url;
-                    if (albumArtUrl) {
-                        document.getElementById('album-art').src = albumArtUrl;
+                if (data && data.isPlaying) {
+                    document.getElementById('track-name').textContent = data.title;
+                    document.getElementById('artist-name').textContent = data.artist;
+
+                    if (data.albumImageUrl) {
+                        document.getElementById('album-art').src = data.albumImageUrl;
                     }
                 } else {
                     document.getElementById('track-name').textContent = "Not playing";
