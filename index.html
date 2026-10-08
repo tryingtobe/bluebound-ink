@@ -454,14 +454,14 @@
     <script src="/site.js"></script>
 
     <script>
-        // Latest from the Reading Log: copy the newest 3 books from books.html,
+        // Latest from the Reading Log: copy the newest 5 books from books.html,
         // so the home page updates by itself when a book is added there.
         (async function showLatestReviews() {
             const list = document.getElementById('latest-reviews');
             try {
                 const response = await fetch('/books.html');
                 const page = new DOMParser().parseFromString(await response.text(), 'text/html');
-                const latest = Array.from(page.querySelectorAll('.book-item')).slice(0, 3);
+                const latest = Array.from(page.querySelectorAll('.book-item')).slice(0, 5);
 
                 latest.forEach(book => {
                     const item = document.importNode(book, true);

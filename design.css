@@ -83,6 +83,7 @@ main {
 }
 
 .book-item .book-info {
+    flex: 0 0 auto !important;
     gap: 2px;
 }
 
@@ -332,5 +333,81 @@ body.light-mode .review-body p:first-of-type::first-letter {
 
     .featured-quote {
         font-size: 1.5rem !important;
+    }
+}
+
+/* ---------- Wider layout: use the side space on big screens ----------
+   Covers and grids use the full width (1180px).
+   Reading text stays narrow (about 70 letters per line), so it is easy to read. */
+
+body {
+    max-width: 1180px !important;
+}
+
+.footer-container,
+.footer-bottom {
+    max-width: 1180px !important;
+}
+
+/* Text pages: keep the reading column narrow */
+.about-content,
+.privacy-container,
+.status-message {
+    max-width: 720px;
+}
+
+/* Review pages on big screens: cover and details stay on the left while you scroll */
+@media screen and (min-width: 1000px) {
+    main:has(> .review-header) {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 720px);
+        column-gap: 80px;
+        align-items: start;
+    }
+
+    main:has(> .review-header) > .review-header {
+        grid-column: 1;
+        grid-row: 1 / span 20;
+        position: sticky;
+        top: 40px;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 28px !important;
+        padding: 0 !important;
+        border-bottom: none;
+    }
+
+    main:has(> .review-header) > :not(.review-header) {
+        grid-column: 2;
+    }
+
+    main:has(> .review-header) .review-cover {
+        width: 100% !important;
+    }
+
+    main:has(> .review-header) .review-book-title {
+        font-size: 2.4rem !important;
+    }
+
+    main:has(> .review-header) .review-rating-date {
+        flex-wrap: wrap;
+        gap: 6px 14px;
+    }
+
+    main:has(> .review-header) .featured-quote {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        text-align: left;
+    }
+
+    main:has(> .review-header) .featured-quote::before {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Phones: show 4 latest books on the home page (2 rows) */
+    #latest-reviews .book-item:nth-child(n+5) {
+        display: none !important;
     }
 }
