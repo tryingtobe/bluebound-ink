@@ -377,6 +377,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/design.css">
 </head>
 <body>
 
@@ -384,6 +385,21 @@
 
     <main>
         <p class="home-intro">A personal space for books, music, and creative explorations.</p>
+
+        <!-- Currently reading: change the cover, title, author, note and progress here -->
+        <section class="now-reading" aria-label="Currently reading">
+            <img class="now-reading-cover" src="/images/covers/east-of-eden.webp" alt="East of Eden cover">
+            <div>
+                <div class="now-reading-label">Currently reading</div>
+                <h2 class="now-reading-title">East of Eden</h2>
+                <div class="now-reading-author">by John Steinbeck</div>
+                <p class="now-reading-note">"And now that you don't have to be perfect, you can be good."</p>
+                <div class="progress">
+                    <div class="progress-bar"><span style="width: 45%"></span></div>
+                    <div class="progress-text">45% · page 270 of 601</div>
+                </div>
+            </div>
+        </section>
 
         <h2 class="posts-section-title gold-accent">Latest from the Reading Log</h2>
 
@@ -460,7 +476,7 @@
                             tag.textContent = '#' + genre;
                             tags.appendChild(tag);
                         });
-                        item.querySelector('.book-info').appendChild(tags);
+                        item.appendChild(tags);
                     }
                     list.appendChild(item);
                 });
