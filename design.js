@@ -1,41 +1,11 @@
 // Bluebound Ink: design helpers for review pages.
-// 1. Takes the main color of the book cover and gives the header that color.
-// 2. Adds "More #genre books" at the end, read from books.html.
+// Adds "More #genre books" at the end, read from books.html.
 
 (function () {
     const cover = document.querySelector('.review-cover');
     if (!cover) return;
 
-    // ---------- 1. Cover color ----------
-    function useCoverColor() {
-        try {
-            const canvas = document.createElement('canvas');
-            canvas.width = 24;
-            canvas.height = 36;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(cover, 0, 0, canvas.width, canvas.height);
-            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-
-            // Average the colorful pixels; skip near-white, near-black and grey ones
-            let r = 0, g = 0, b = 0, n = 0;
-            for (let i = 0; i < pixels.length; i += 4) {
-                const pr = pixels[i], pg = pixels[i + 1], pb = pixels[i + 2];
-                const max = Math.max(pr, pg, pb), min = Math.min(pr, pg, pb);
-                if (max < 40 || min > 220 || max - min < 30) continue;
-                r += pr; g += pg; b += pb; n++;
-            }
-            if (!n) return;
-            document.body.style.setProperty('--cover-color',
-                `${Math.round(r / n)}, ${Math.round(g / n)}, ${Math.round(b / n)}`);
-        } catch (error) {
-            // Keep the default gold color
-        }
-    }
-
-    if (cover.complete) useCoverColor();
-    else cover.addEventListener('load', useCoverColor);
-
-    // ---------- 2. More like this ----------
+    // ---------- More like this ----------
     const tags = Array.from(document.querySelectorAll('.review-tags .genre-tag'))
         .map(tag => tag.textContent.replace('#', ''));
     if (!tags.length) return;

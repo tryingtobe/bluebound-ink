@@ -5,7 +5,6 @@
 
 :root {
     --shelf-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-    --cover-color: 212, 175, 55; /* review pages replace this with the cover's own color */
 }
 
 body.light-mode {
@@ -225,28 +224,10 @@ main {
 
 /* ---------- 3. Review pages: magazine style ---------- */
 
-/* A full-width band in the cover's own color */
 .review-header {
-    position: relative;
     align-items: center !important;
-    border-bottom: none !important;
-    padding: 50px 0 !important;
+    padding: 20px 0 50px 0 !important;
     margin-bottom: 30px !important;
-}
-
-.review-header::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 100vw;
-    transform: translateX(-50%);
-    background:
-        radial-gradient(600px 300px at 25% 50%, rgba(var(--cover-color), 0.45), transparent 70%),
-        linear-gradient(180deg, rgba(var(--cover-color), 0.18), transparent);
-    border-bottom: 1px solid rgba(var(--cover-color), 0.35);
 }
 
 .review-cover {
