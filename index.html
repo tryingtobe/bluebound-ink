@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journal | Bluebound Ink</title>
+    <!-- Link preview (Telegram, WhatsApp, Instagram, X, ...) -->
+    <meta name="description" content="A personal space for books, music, and creative explorations.">
+    <meta property="og:site_name" content="Bluebound Ink">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bluebound Ink">
+    <meta property="og:description" content="A personal space for books, music, and creative explorations.">
+    <meta property="og:url" content="https://bluebound-ink.com/">
+    <meta property="og:image" content="https://bluebound-ink.com/images/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Importing Cormorant Garamond from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +22,34 @@
     <link rel="stylesheet" href="/style.css">
     
     <style>
+
+        .home-intro {
+            font-size: 1.5rem;
+            font-style: italic;
+            opacity: 0.85;
+            margin: 0 0 60px 0;
+        }
+
+        #latest-reviews {
+            margin: 20px 0 30px 0;
+        }
+
+        #latest-reviews .review-tags {
+            margin-top: 8px;
+        }
+
+        .see-all-link {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-date);
+            text-decoration: none;
+        }
+
+        .see-all-link:hover {
+            text-decoration: underline;
+        }
 
         .posts-section-title {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -345,23 +383,14 @@
     <header id="site-header"></header>
 
     <main>
-        <h2 class="posts-section-title gold-accent">Latest Posts</h2>
-        
-        <div class="post-list">
-            <article class="post-item">
-                <div class="post-header">
-                    <h2><a class="post-title" href="post-single.html">coming soon: post one</a></h2>
-                    <div class="post-date">Soon</div>
-                </div>
-            </article>
+        <p class="home-intro">A personal space for books, music, and creative explorations.</p>
 
-            <article class="post-item">
-                <div class="post-header">
-                    <h2><a class="post-title" href="post-single.html">coming soon:second one</a></h2>
-                    <div class="post-date">Soon</div>
-                </div>
-            </article>
-        </div>
+        <h2 class="posts-section-title gold-accent">Latest from the Reading Log</h2>
+
+        <!-- Filled by the script below with the newest books from books.html -->
+        <div class="book-list" id="latest-reviews"></div>
+
+        <a class="see-all-link" href="/books.html">See the full reading log →</a>
     </main>
 
     <!-- Side Trigger Tab -->
@@ -407,6 +436,39 @@
     <footer id="site-footer" class="site-footer"></footer>
 
     <script src="/site.js"></script>
+
+    <script>
+        // Latest from the Reading Log: copy the newest 3 books from books.html,
+        // so the home page updates by itself when a book is added there.
+        (async function showLatestReviews() {
+            const list = document.getElementById('latest-reviews');
+            try {
+                const response = await fetch('/books.html');
+                const page = new DOMParser().parseFromString(await response.text(), 'text/html');
+                const latest = Array.from(page.querySelectorAll('.book-item')).slice(0, 3);
+
+                latest.forEach(book => {
+                    const item = document.importNode(book, true);
+                    const genres = (item.dataset.genres || '').split(' ').filter(Boolean);
+                    if (genres.length) {
+                        const tags = document.createElement('div');
+                        tags.className = 'review-tags';
+                        genres.forEach(genre => {
+                            const tag = document.createElement('a');
+                            tag.className = 'genre-tag';
+                            tag.href = '/books.html?genre=' + genre;
+                            tag.textContent = '#' + genre;
+                            tags.appendChild(tag);
+                        });
+                        item.querySelector('.book-info').appendChild(tags);
+                    }
+                    list.appendChild(item);
+                });
+            } catch (error) {
+                list.hidden = true;
+            }
+        })();
+    </script>
 
     <script>
         // Side Pull to Center Modal Interactions
