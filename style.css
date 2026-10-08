@@ -456,7 +456,7 @@ header nav a:hover {
 .footer-container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 50px;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -519,11 +519,13 @@ header nav a:hover {
 /* Subscription Form matching the site tone */
 .subscribe-form {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 15px;
 }
 
 .subscribe-form input[type="email"] {
+    min-width: 180px;
     padding: 10px 14px;
     border-radius: 4px;
     border: 1px solid var(--border-color);
@@ -572,7 +574,6 @@ header nav a:hover {
     font-size: 1rem;
     opacity: 0.6;
 }
-<<<<<<< HEAD
 
 /* Page Layout & Privacy Policy Styling Matched to Bluebound Ink */
 html, body {
@@ -640,8 +641,40 @@ body.page-layout {
 
 .privacy-container li {
     margin-bottom: 10px;
-<<<<<<< HEAD
-=======
+}
+
+/* Shared header and footer (built by site.js) */
+header {
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.site-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header nav a.active {
+    opacity: 1;
+    color: #e6c567;
+}
+
+.footer-legal {
+    margin-top: 15px;
+}
+
+.footer-legal a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 10px;
+    opacity: 0.8;
+}
+
+.footer-legal a:hover {
+    opacity: 1;
+    color: #e6c567;
+}
+
 /* --- Mobile Responsive Adjustments --- */
 @media screen and (max-width: 768px) {
     body {
@@ -707,9 +740,37 @@ body.page-layout {
     .subscribe-form {
         flex-direction: column;
     }
->>>>>>> ddcb180 (Add mobile-friendly responsive styles to stylesheet)
-}
-=======
-}
+    /* Long review text: left-aligned reads better than justified on a narrow screen */
+    .review-body p {
+        text-align: left;
+    }
 
->>>>>>> 7606764 (Renamed blog to index and updated DNS/email configuration references)
+    .review-meta-info {
+        min-width: 0;
+    }
+
+    /* Footer sits inside the body padding, so no extra side padding */
+    .site-footer {
+        margin-top: 60px;
+        padding: 50px 0 30px 0;
+    }
+
+    .footer-container,
+    .footer-bottom {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .footer-col {
+        min-width: 0;
+    }
+
+    .subscribe-form button {
+        padding: 12px 20px;
+    }
+
+    /* Spotify players and other embeds never wider than the screen */
+    iframe {
+        max-width: 100%;
+    }
+}
