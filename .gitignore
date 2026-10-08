@@ -1,7 +1,13 @@
+# Dependencies
 node_modules/
+
+# Secrets: never commit these
 .env
 serviceAccountKey.json
-a.jsserviceAccountKey.json
+serviceAccountKey.json.save
+*.save
+
+# OS files
 desktop.ini
 .DS_Store
 Thumbs.db

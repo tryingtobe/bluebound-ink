@@ -1,23 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const nodemailer = require('nodemailer');
-
-const app = express();
-
-app.use(express.json());
-
 const cors = require('cors');
 const axios = require('axios');
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
-<<<<<<< HEAD
-//require('dotenv').config(); // MUST be line 1
-//const { Resend } = require('resend');
-//const resend = new Resend(process.env.RESEND_API_KEY);
-=======
-require('dotenv').config();
-
-const { Resend } = require('resend');
->>>>>>> e7d52f0 (Add Nodemailer email routing for book recommendations)
 
 // Initialize Firebase Admin using the service account key file
 const serviceAccount = require('./serviceAccountKey.json');
@@ -27,27 +15,15 @@ initializeApp({
 });
 const db = getFirestore();
 
-// Configure Nodemailer transporter using Gmail SMTP
-<<<<<<< HEAD
-//const transporter = nodemailer.createTransport({
- //   service: 'gmail',
-  //  auth: {
-    //    user: process.env.EMAIL_USER,
-      //  pass: process.env.EMAIL_PASS
-    //}
-//});
-=======
+// Configure Nodemailer transporter using Gmail SMTP.
+// EMAIL_USER and EMAIL_PASS come from .env. Never write the password in this file.
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'bluebound.ink@gmail.com',
-        pass: Moonandstars2019!
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
->>>>>>> e7d52f0 (Add Nodemailer email routing for book recommendations)
-
-// Initialize Resend with your API key from .env
-//const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 app.use(cors());
@@ -139,6 +115,38 @@ app.post('/api/recommendations', async (req, res) => {
     return res.status(500).json({ error: 'Failed to send email.' });
   }
 });
+
+app.post('/api/subscribe', async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ success: false, message: "Email is required." });
+        }
+
+        const subscriberRef = db.collection('subscribers').doc(email);
+
+        await subscriberRef.set({
+            email: email,
+            subscribedAt: new Date().toISOString()
+        });
+
+        const mailOptions = {
+            from: {
+                name: 'Bluebound Ink',
+                address: process.env.EMAIL_USER
+            },
+            to: email,
+            subject: 'Welcome to Bluebound Ink',
+            text: 'Thank you for subscribing to Bluebound Ink.',
+            html: `
+                <div style="font-family: Georgia, serif; color: #2c2925; padding: 20px;">
+                    <h2 style="font-style: italic;">Welcome to Bluebound Ink</h2>
+                    <p>Thank you for subscribing. You are now on the list to receive occasional notes.</p>
+                    <p style="color: #888; font-size: 0.9rem; margin-top: 30px;">Bluebound Ink</p>
+                </div>
+            `
+        };
 
         await transporter.sendMail(mailOptions);
         console.log(`Confirmation email sent and subscriber saved: ${email}`);
